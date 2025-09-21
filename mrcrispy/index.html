@@ -20,6 +20,67 @@
         <link href="css/bootstrap-icons.css" rel="stylesheet">
 
         <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
+        <style>
+           /* Custom Navbar Styling */
+.custom-navbar {
+  background-color: #000 !important;  /* Black background */
+  padding: 12px 0;
+}
+
+/* Brand */
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+/* Yellow text */
+.text-yellow {
+  color: #FFD700 !important;
+}
+
+/* Nav Links */
+.custom-navbar .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Active + Hover */
+.custom-navbar .nav-link.active,
+.custom-navbar .nav-link:hover {
+  color: #FFD700 !important;
+  font-weight: 600;
+}
+
+/* Buttons */
+.custom-navbar .btn-warning {
+  background-color: #FFD700;
+  border: none;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.custom-navbar .btn-warning:hover {
+  background-color: #ffc107;
+  color: #111;
+}
+
+/* Toggler button (hamburger) */
+.custom-toggler {
+  border: 2px solid #FFD700;  /* Yellow border */
+  background-color: #FFD700 !important; /* Yellow background */
+  border-radius: 6px;
+  padding: 0px 0px;
+}
+
+/* Change hamburger icon lines to white */
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+        </style>
         
 <!--
 
@@ -31,8 +92,59 @@ https://www.tooplate.com/view/2129-crispy-kitchen
     </head>
     
     <body>
+       <nav class="navbar navbar-expand-lg shadow-lg navbar-dark custom-navbar">
+  <div class="container">
+    <!-- Mobile Toggler -->
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Brand -->
+    <a class="navbar-brand text-yellow fw-bold" href="index.html">
+      MR. CRISPY
+    </a>
+
+    <!-- Mobile Reservation Button -->
+    <div class="d-lg-none">
+      <button type="button" class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#BookingModal">
+        Reservation
+      </button>
+    </div>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link active text-yellow" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">Story</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="menu.html">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="news.html">Our Updates</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Desktop Reservation Button -->
+    <div class="d-none d-lg-block">
+      <button type="button" class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#BookingModal">
+        Reservation
+      </button>
+    </div>
+  </div>
+</nav>
+
+
         
-        <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+        <!-- <nav class="navbar navbar-expand-lg shadow-lg  navbar-dark bg-dark">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -75,7 +187,7 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                 </div>
 
             </div>
-        </nav>
+        </nav> -->
 
         <main>
 
@@ -86,7 +198,7 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                         <div class="col-lg-5 col-12 m-auto">
                             <div class="heroText">
 
-                                <h1 class="text-white mb-lg-5 mb-3">Delicious Steaks</h1>
+                                <h1 class="text-white mb-lg-5 mb-3">Street Food That Makes You Crispy Happy!</h1>
 
                                 <div class="c-reviews my-3 d-flex flex-wrap align-items-center">
                                     <div class="d-flex flex-wrap align-items-center">

@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Crispy - I Love Street Food</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script defer src="bundle.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="images/583z3ddh_logo.jpg" alt="Mr. Crispy Logo" class="logo">
+                <div class="brand-text">
+                    <h1>MR. CRISPY</h1>
+                    <p>I LOVE STREET FOOD</p>
+                </div>
+            </div>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" onclick="scrollToSection('home')">Home</a>
+                <a href="#menu" onclick="scrollToSection('menu')">Menu</a>
+                <a href="#about" onclick="scrollToSection('about')">About</a>
+                <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+                <button class="cta-btn" onclick="makeCall()">
+                    <i class="fas fa-phone"></i>
+                    Order Now
+                </button>
+            </nav>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="highlight">MR. CRISPY</span>
+                </h1>
+                <p class="hero-subtitle">I LOVE STREET FOOD</p>
+                <p class="hero-description">
+                    Experience authentic Indian street food crafted with love and served with passion. 
+                    From crispy potato twisters to delicious momos - taste the magic!
+                </p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="makeCall()">
+                        <i class="fas fa-phone"></i>
+                        Order Now: 8658414319
+                    </button>
+                    <button class="btn btn-outline" onclick="openInstagram()">
+                        <i class="fab fa-instagram"></i>
+                        Follow Us
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kiosk Locations -->
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-image">
+                        <img src="images/4isq279m_Kiosk1.jpg" alt="Uditnagar Location">
+                        <div class="location-overlay">
+                            <h3>Uditnagar Location</h3>
+                            <div class="location-address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Uditnagar FoodCourt, Rourkela</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-actions">
+                        <button class="btn btn-primary full-width" onclick="openMap()">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Get Directions
+                        </button>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-image">
+                        <img src="images/ko4if69t_Kiosk2.jpg" alt="Aambagan Location">
+                        <div class="location-overlay">
+                            <h3>Aambagan Location</h3>
+                            <div class="location-address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Aambagan, Rourkela</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-actions">
+                        <button class="btn btn-primary full-width" onclick="openMap()">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Get Directions
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="highlight">Delicious Menu</span></h2>
+                <p>Explore our mouth-watering selection of street food favorites, prepared fresh and served with love at both locations.</p>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Potato Twister -->
+                <div class="menu-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="menu-category">Potato Twister</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Salted Potato Twister</span>
+                            <span class="menu-item-price">₹30</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Periperi Potato Twister</span>
+                            <span class="menu-item-price">₹40</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cheese Potato Twister</span>
+                            <span class="menu-item-price">₹50</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- French Fries -->
+                <div class="menu-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="menu-category">French Fries</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Salted Fries</span>
+                            <span class="menu-item-price">₹30 | ₹60</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Periperi Fries</span>
+                            <span class="menu-item-price">₹30 | ₹60</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cheese Fries</span>
+                            <span class="menu-item-price">₹50 | ₹90</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Chilli Potato</span>
+                            <span class="menu-item-price">₹60 | ₹120</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Honey Chilli Potato</span>
+                            <span class="menu-item-price">₹70 | ₹140</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Paneer -->
+                <div class="menu-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="menu-category">Paneer</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Paneer Stick (Fried)</span>
+                            <span class="menu-item-price">₹30 Per Stick</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Paneer Kurkure</span>
+                            <span class="menu-item-price">₹50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Crispy Paneer Chilli</span>
+                            <span class="menu-item-price">₹80 | ₹160</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mushroom -->
+                <div class="menu-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="menu-category">Mushroom</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Mushroom Stick (Fried)</span>
+                            <span class="menu-item-price">₹30 Per Stick</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Mushroom Chilli</span>
+                            <span class="menu-item-price">₹80 | ₹150</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Special Items -->
+                <div class="menu-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="menu-category">Special Items</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Crispy Corn</span>
+                            <span class="menu-item-price">₹50 | ₹60</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Onion Ring</span>
+                            <span class="menu-item-price">₹50</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Momos -->
+                <div class="menu-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <h3 class="menu-category">Momos</h3>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Veg Momo - Steam</span>
+                            <span class="menu-item-price">₹40 | ₹80</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Veg Momo - Fried</span>
+                            <span class="menu-item-price">₹50 | ₹100</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Veg Momo - Kurkure</span>
+                            <span class="menu-item-price">₹60 | ₹120</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Veg Momo - Chilli</span>
+                            <span class="menu-item-price">₹70 | ₹130</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Paneer Momo - Steam</span>
+                            <span class="menu-item-price">₹50 | ₹100</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Paneer Momo - Fried</span>
+                            <span class="menu-item-price">₹60 | ₹120</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Paneer Momo - Kurkure</span>
+                            <span class="menu-item-price">₹70 | ₹140</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Paneer Momo - Chilli</span>
+                            <span class="menu-item-price">₹80 | ₹150</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="menu-cta">
+                <p>Ready to taste the magic?</p>
+                <div class="menu-buttons">
+                    <button class="btn btn-primary" onclick="makeCall()">
+                        Call 8658414319 to Order
+                    </button>
+                    <button class="btn btn-outline" onclick="openInstagram()">
+                        Follow on Instagram
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About <span class="highlight">Mr. Crispy</span></h2>
+                <p>Founded with a passion for authentic Indian street food, Mr. Crispy brings you the most delicious and crispy treats right to your neighborhood.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>4.8★</h3>
+                    <p>Customer Rating</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>10K+</h3>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>2</h3>
+                    <p>Locations</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>5+</h3>
+                    <p>Years Experience</p>
+                </div>
+            </div>
+
+            <!-- Our Story -->
+            <div class="story-card">
+                <h3>Our Story</h3>
+                <p>Mr. Crispy started as a small dream to bring the authentic taste of Indian street food to the people of Rourkela. What began as a single kiosk has now grown into two beloved locations, each serving the same quality and passion that started it all.</p>
+                <p>Our secret lies in using fresh ingredients, traditional recipes, and a lot of love. From our signature potato twisters to mouth-watering momos, every dish is crafted to perfection by our experienced team.</p>
+                <p>We believe that great food brings people together, and that's exactly what we strive to do every day - create memorable experiences one crispy bite at a time.</p>
+            </div>
+
+            <!-- Team Section -->
+            <div class="team-header">
+                <h3>Meet Our <span class="highlight">Amazing Team</span></h3>
+                <p>The passionate people behind Mr. Crispy who work tirelessly to bring you the best street food experience.</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&amp;h=400&amp;fit=crop&amp;crop=face" alt="Rahul Sharma" class="team-avatar">
+                    <h4 class="team-name">Rahul Sharma</h4>
+                    <p class="team-position">Head Chef</p>
+                    <span class="team-experience">5 years experience</span>
+                </div>
+                <div class="team-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b64c?w=400&amp;h=400&amp;fit=crop&amp;crop=face" alt="Priya Singh" class="team-avatar">
+                    <h4 class="team-name">Priya Singh</h4>
+                    <p class="team-position">Assistant Chef</p>
+                    <span class="team-experience">3 years experience</span>
+                </div>
+                <div class="team-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&amp;h=400&amp;fit=crop&amp;crop=face" alt="Amit Kumar" class="team-avatar">
+                    <h4 class="team-name">Amit Kumar</h4>
+                    <p class="team-position">Kitchen Manager</p>
+                    <span class="team-experience">4 years experience</span>
+                </div>
+                <div class="team-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&amp;h=400&amp;fit=crop&amp;crop=face" alt="Sneha Patel" class="team-avatar">
+                    <h4 class="team-name">Sneha Patel</h4>
+                    <p class="team-position">Quality Controller</p>
+                    <span class="team-experience">2 years experience</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 bg-gray-900 text-white"><div class="container mx-auto px-4"><div class="text-center mb-16"><h2 class="text-4xl font-bold mb-4">Our <span class="text-yellow-400">Delicious Gallery</span></h2><p class="text-lg text-gray-300 max-w-3xl mx-auto">Take a look at our mouth-watering street food creations. Each dish is crafted with love and served fresh!</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8"><div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:transform hover:scale-105 transition-transform cursor-pointer"><img alt="Mushroom Sticks (Fried)" class="w-full h-64 object-cover" src="images/x2yxaqnt_WhatsApp%20Image%202025-06-27%20at%2013.54.02%20%281%29.jpeg"><div class="p-6"><h3 class="text-xl font-bold text-yellow-400 mb-2">Mushroom Sticks (Fried)</h3><p class="text-gray-300 text-sm">Crispy and delicious mushroom sticks, perfectly fried to golden perfection</p></div></div><div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:transform hover:scale-105 transition-transform cursor-pointer"><img alt="Paneer Sticks (Fried)" class="w-full h-64 object-cover" src="images/rrfczmcj_WhatsApp%20Image%202025-06-27%20at%2013.54.02%20%282%29.jpeg"><div class="p-6"><h3 class="text-xl font-bold text-yellow-400 mb-2">Paneer Sticks (Fried)</h3><p class="text-gray-300 text-sm">Fresh paneer cubes marinated with spices and fried to perfection</p></div></div><div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:transform hover:scale-105 transition-transform cursor-pointer"><img alt="Crispy Corn (Fried)" class="w-full h-64 object-cover" src="images/g21ss21p_WhatsApp%20Image%202025-06-27%20at%2013.54.02.jpeg"><div class="p-6"><h3 class="text-xl font-bold text-yellow-400 mb-2">Crispy Corn (Fried)</h3><p class="text-gray-300 text-sm">Spicy and tangy corn kernels with the perfect crispy texture</p></div></div><div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:transform hover:scale-105 transition-transform cursor-pointer"><img alt="Potato Twister" class="w-full h-64 object-cover" src="images/b7glg6rp_WhatsApp%20Image%202025-06-27%20at%2013.54.03%20%281%29.jpeg"><div class="p-6"><h3 class="text-xl font-bold text-yellow-400 mb-2">Potato Twister</h3><p class="text-gray-300 text-sm">Our signature spiral-cut potato, seasoned and fried to crispy perfection</p></div></div><div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:transform hover:scale-105 transition-transform cursor-pointer"><img alt="French Fries" class="w-full h-64 object-cover" src="images/4m47bd9x_WhatsApp%20Image%202025-06-27%20at%2013.54.03.jpeg"><div class="p-6"><h3 class="text-xl font-bold text-yellow-400 mb-2">French Fries</h3><p class="text-gray-300 text-sm">Classic French fries served with our special dipping sauces</p></div></div></div><div class="text-center"><p class="text-gray-300 mb-4">Love what you see? Come visit us and taste these amazing dishes!</p><button class="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">Order Now: 8658414319</button></div></div></section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Visit <span class="highlight">Our Locations</span></h2>
+                <p>Find us at either of our two convenient locations in Rourkela. Come and experience the taste of authentic street food!</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-image">
+                        <img src="images/4isq279m_Kiosk1.jpg" alt="Uditnagar Location">
+                        <div class="contact-overlay">
+                            <h3>Uditnagar Location</h3>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p class="info-title">Address</p>
+                                <p class="info-text">Uditnagar FoodCourt, Rourkela</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p class="info-title">Phone</p>
+                                <p class="info-text">8658414319</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <p class="info-title">Hours</p>
+                                <p class="info-text">Daily: 11:00 AM - 11:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="contact-buttons">
+                            <button class="btn btn-primary" onclick="openMap()">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Get Directions
+                            </button>
+                            <button class="btn btn-outline" onclick="openInstagram()">
+                                <i class="fab fa-instagram"></i>
+                                Follow Us
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-image">
+                        <img src="images/ko4if69t_Kiosk2.jpg" alt="Aambagan Location">
+                        <div class="contact-overlay">
+                            <h3>Aambagan Location</h3>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p class="info-title">Address</p>
+                                <p class="info-text">Aambagan, Rourkela</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p class="info-title">Phone</p>
+                                <p class="info-text">8658414319</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <p class="info-title">Hours</p>
+                                <p class="info-text">Daily: 11:00 AM - 11:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="contact-buttons">
+                            <button class="btn btn-primary" onclick="openMap()">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Get Directions
+                            </button>
+                            <button class="btn btn-outline" onclick="openInstagram()">
+                                <i class="fab fa-instagram"></i>
+                                Follow Us
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="contact-cta">
+                <h3>Ready to Order?</h3>
+                <p>Call us now to place your order or visit us at any of our locations. We're always ready to serve you the best street food in town!</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-lg" onclick="makeCall()">
+                        <i class="fas fa-phone"></i>
+                        Call Now: 8658414319
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="openInstagram()">
+                        <i class="fab fa-instagram"></i>
+                        @mr_crispy_rkl
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-info">
+                        <img src="images/583z3ddh_logo.jpg" alt="Mr. Crispy Logo" class="footer-logo">
+                        <div class="brand-text">
+                            <h3>MR. CRISPY</h3>
+                            <p>I LOVE STREET FOOD</p>
+                        </div>
+                    </div>
+                    <p>Serving authentic Indian street food with love and passion. Experience the magic of crispy, delicious treats at our two locations in Rourkela.</p>
+                    <div class="social-links">
+                        <button onclick="openInstagram()" class="social-btn">
+                            <i class="fab fa-instagram"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                        <li><a href="#menu" onclick="scrollToSection('menu')">Menu</a></li>
+                        <li><a href="#about" onclick="scrollToSection('about')">About Us</a></li>
+                        <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>8658414319</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Uditnagar & Aambagan</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-instagram"></i>
+                            <span>@mr_crispy_rkl</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Made with <i class="fas fa-heart"></i> for food lovers</p>
+                <p class="copyright">© 2024 Mr. Crispy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
