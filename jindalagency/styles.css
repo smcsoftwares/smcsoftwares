@@ -1036,83 +1036,76 @@ html {
     scroll-behavior: smooth;
 }
 
-.hero{
+.hero-container{
     display:flex;
-    flex-direction:column;          /* mobile: content first, image below */
+    flex-direction:column;      /* mobile: text first, image below */
+    align-items:center;
     gap:2rem;
     padding:2rem 0;
 }
 
-/* text block */
+/* left block */
 .hero-content{
-    flex:1 1 55%;
+    flex:1 1 50%;
 }
 
-/* image block */
-.hero-image{
-    flex:1 1 45%;
+/* right block */
+.image-content{
+    flex:1 1 10%;
     display:flex;
     justify-content:center;
 }
 
-.hero-image-inner{
-    text-align:center;
-}
-
-.hero-image-wrapper{
-    position:relative;
-    display:inline-block;
-}
-
-/* main image */
-.hero-image img{
-    max-width:260px;
-    width:100%;
+.image-content img{
+    max-width:100%;
+    width:320px;               /* adjust as you like */
     height:auto;
     border-radius:12px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.18);
     object-fit:cover;
-    display:block;
+    box-shadow:0 8px 24px rgba(0,0,0,0.15);
 }
-
-/* circular overlay */
-.hero-image-circle{
-    position:absolute;
-    right:-18px;
-    bottom:-18px;
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:rgba(0,137,74,0.9); /* green */
-    border:4px solid #ffffff;
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
-}
-
-/* optional text inside circle */
-.hero-image-circle::before{
-    content:"Since 1995";
-    color:#fff;
-    font-size:.7rem;
-    font-weight:600;
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.image-wrapper{
     text-align:center;
 }
 
-/* caption */
-.hero-caption{
-    margin-top:.7rem;
+.image-content img{
+    max-width:100%;
+    width:320px;
+    height:auto;
+    border-radius:12px;
+    object-fit:cover;
+    box-shadow:0 8px 24px rgba(0,0,0,0.15);
+    display:block;
+    margin:0 auto;
+}
+
+.image-caption{
+    margin-top:.6rem;
     font-size:.9rem;
     color:#555;
 }
 
-.hero-name{
+.image-name{
     font-weight:600;
     color:#222;
 }
 
-.hero-title-text{
-    font
+.image-salutation{
+    font-size:.8rem;
+    color:#777;
+}
+
+
+/* desktop / tablet: side by side, image on right */
+@media (min-width:768px){
+    .hero-container{
+        flex-direction:row;
+        align-items:center;
+    }
+    .hero-content{
+        align-self:flex-start;
+    }
+    .image-content{
+        justify-content:flex-end;
+    }
+}
