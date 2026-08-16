@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Rauniyar Matrimony</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .login-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+    }
+
+    .login-left {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: var(--spacing-3xl);
+      text-align: center;
+    }
+
+    .login-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: var(--spacing-3xl);
+      background-color: var(--background);
+    }
+
+    .login-form-wrapper {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .login-header h1 {
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .form-tabs {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-xl);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .form-tab {
+      flex: 1;
+      padding: var(--spacing-md) 0;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      font-size: 14px;
+    }
+
+    .form-tab.active {
+      color: var(--primary);
+    }
+
+    .form-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: var(--spacing-md);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .form-input-group {
+      position: relative;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      font-size: 13px;
+    }
+
+    .remember-forgot a {
+      color: var(--primary);
+    }
+
+    .social-divider {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin: var(--spacing-xl) 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .social-divider::before,
+    .social-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--border);
+    }
+
+    .social-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .social-btn {
+      padding: var(--spacing-md);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+    }
+
+    .social-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .signup-link {
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: var(--spacing-lg);
+    }
+
+    .signup-link a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .trust-badges {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-2xl);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .trust-badge {
+      text-align: center;
+    }
+
+    .trust-badge-icon {
+      font-size: 28px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .trust-badge-text {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .login-container {
+        grid-template-columns: 1fr;
+      }
+
+      .login-left {
+        display: none;
+      }
+
+      .login-right {
+        padding: var(--spacing-xl);
+      }
+
+      .login-form-wrapper {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <!-- LEFT SIDE -->
+  <div class="login-left">
+    <div style="max-width: 400px;">
+      <div style="font-size: 80px; margin-bottom: var(--spacing-xl);">❤️</div>
+      <h2 style="font-size: 32px; margin-bottom: var(--spacing-md);">Rauniyar Matrimony</h2>
+      <p style="font-size: 16px; margin-bottom: var(--spacing-2xl); opacity: 0.9;">Where Traditions Meet New Beginnings</p>
+      
+      <p style="margin-bottom: var(--spacing-lg); opacity: 0.85;">Join thousands of Rauniyar community members who have found their perfect match.</p>
+      
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <div class="trust-badge-icon">✓</div>
+          <div class="trust-badge-text">Verified Profiles</div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">🔒</div>
+          <div class="trust-badge-text">Secure & Safe</div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">👨‍👩‍👧‍👦</div>
+          <div class="trust-badge-text">Community Trusted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="login-right">
+    <div class="login-form-wrapper">
+      <div class="login-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in to your account</p>
+      </div>
+
+      <!-- Form Tabs -->
+      <div class="form-tabs">
+        <button class="form-tab active" data-tab="email-tab">Email</button>
+        <button class="form-tab" data-tab="phone-tab">Phone</button>
+      </div>
+
+      <!-- EMAIL LOGIN TAB -->
+      <div class="tab-content active" id="email-tab">
+        <form id="email-login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="you@example.com" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="form-input-group">
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Enter your password" 
+                required
+              >
+              <button type="button" class="password-toggle" onclick="togglePasswordVisibility('password')">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="remember-forgot">
+            <label>
+              <input type="checkbox" name="remember"> Remember me
+            </label>
+            <a href="#forgot">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            Sign In
+          </button>
+        </form>
+      </div>
+
+      <!-- PHONE LOGIN TAB -->
+      <div class="tab-content" id="phone-tab">
+        <form id="phone-login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="phone">Mobile Number</label>
+            <div style="display: flex; gap: var(--spacing-sm);">
+              <input type="text" value="+91" disabled style="width: 60px;">
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                placeholder="10 digit number" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="otp">OTP</label>
+            <div style="display: flex; gap: var(--spacing-sm);">
+              <input 
+                type="text" 
+                id="otp" 
+                placeholder="6 digit OTP" 
+                maxlength="6" 
+                required
+              >
+              <button type="button" class="btn btn-outline btn-sm" style="flex-shrink: 0;">
+                Send OTP
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            Verify & Sign In
+          </button>
+        </form>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="social-divider">or continue with</div>
+
+      <!-- SOCIAL LOGIN -->
+      <div class="social-buttons">
+        <button class="social-btn">
+          <i class="fab fa-google"></i> Google
+        </button>
+        <button class="social-btn">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </button>
+      </div>
+
+      <!-- SIGNUP LINK -->
+      <div class="signup-link">
+        Don't have an account? <a href="register.html">Create one now</a>
+      </div>
+
+      <!-- SECURITY INFO -->
+      <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--border);">
+        <i class="fas fa-shield-alt"></i> Your data is secured with bank-level encryption
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.form-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Remove active class from all tabs and contents
+      document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      // Add active class to clicked tab and corresponding content
+      tab.classList.add('active');
+      const tabId = tab.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+
+  // Password visibility toggle
+  function togglePasswordVisibility(inputId) {
+    const input = document.getElementById(inputId);
+    const btn = event.target.closest('button');
+    
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      input.type = 'password';
+      btn.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  }
+
+  // Login handler
+  function handleLogin(e) {
+    e.preventDefault();
+    UI.showToast('Login successful! Redirecting...', 'success');
+    setTimeout(() => {
+      window.location.href = 'user-dashboard.html';
+    }, 1500);
+  }
+</script>
+
+</body>
+</html>

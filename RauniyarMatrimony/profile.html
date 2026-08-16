@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Rauniyar Matrimony</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: var(--spacing-xl);
+      padding: var(--spacing-xl) 0;
+    }
+
+    .profile-main {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .profile-gallery {
+      position: relative;
+      height: 500px;
+      background-color: var(--surface-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      overflow: hidden;
+    }
+
+    .gallery-thumbnails {
+      display: flex;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-md);
+      background-color: var(--surface-secondary);
+      overflow-x: auto;
+    }
+
+    .gallery-thumb {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--transition-base);
+      background-color: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .gallery-thumb:hover,
+    .gallery-thumb.active {
+      border-color: var(--primary);
+    }
+
+    .profile-info {
+      padding: var(--spacing-xl);
+    }
+
+    .profile-header {
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-xl);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .profile-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .profile-title-row h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .profile-badges {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    .profile-meta-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .meta-icon {
+      font-size: 20px;
+      color: var(--secondary);
+    }
+
+    .meta-content h4 {
+      margin: 0 0 2px 0;
+      font-size: 14px;
+    }
+
+    .meta-content p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .profile-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      padding: var(--spacing-lg);
+      background-color: var(--surface-secondary);
+      border-radius: var(--radius-md);
+    }
+
+    .accordion {
+      margin-bottom: var(--spacing-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: var(--spacing-lg);
+      background-color: var(--surface-secondary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--primary);
+      transition: all var(--transition-base);
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .accordion-header:hover {
+      background-color: var(--background);
+    }
+
+    .accordion-header.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .accordion-icon {
+      font-size: 20px;
+      transition: transform var(--transition-base);
+    }
+
+    .accordion-header.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-body.active {
+      display: block;
+    }
+
+    .accordion-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .accordion-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .accordion-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-label {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .item-value {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .sidebar-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .sidebar-card h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .action-btn {
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .action-btn.primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .action-btn.secondary {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .action-btn.secondary:hover {
+      background-color: #B5875F;
+    }
+
+    .action-btn.outline {
+      border: 2px solid var(--border);
+      color: var(--text-secondary);
+      background-color: white;
+    }
+
+    .action-btn.outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .info-box {
+      background-color: var(--background);
+      border-left: 4px solid var(--secondary);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1024px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-gallery {
+        height: 400px;
+      }
+
+      .accordion-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .accordion-item {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .profile-gallery {
+        height: 300px;
+      }
+
+      .profile-info {
+        padding: var(--spacing-md);
+      }
+
+      .profile-meta-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-container">
+    <a href="/" class="logo">
+      <div class="logo-icon">❤️</div>
+      <span>Rauniyar<br>Matrimony</span>
+    </a>
+    
+    <nav>
+      <a href="/">Home</a>
+      <a href="search.html" class="active">Find Matches</a>
+      <a href="community.html">Community</a>
+      <a href="success-stories.html">Success Stories</a>
+    </nav>
+    
+    <div class="nav-right">
+      <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="container-page">
+  <div style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-lg);">
+    <a href="search.html" style="color: var(--text-muted); font-size: 14px;">← Back to Search</a>
+  </div>
+
+  <div class="profile-layout">
+    <!-- PROFILE MAIN -->
+    <div class="profile-main">
+      <!-- GALLERY -->
+      <div class="profile-gallery">
+        👩
+      </div>
+
+      <!-- THUMBNAILS -->
+      <div class="gallery-thumbnails">
+        <div class="gallery-thumb active" onclick="this.parentElement.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active')); this.classList.add('active');">👩</div>
+        <div class="gallery-thumb" onclick="this.parentElement.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active')); this.classList.add('active');">👩</div>
+        <div class="gallery-thumb" onclick="this.parentElement.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active')); this.classList.add('active');">👩</div>
+        <div class="gallery-thumb" onclick="this.parentElement.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active')); this.classList.add('active');">👩</div>
+      </div>
+
+      <!-- PROFILE INFO -->
+      <div class="profile-info">
+        <div class="profile-header">
+          <div class="profile-title-row">
+            <div>
+              <h1>Priya Gupta</h1>
+              <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 14px;">Profile ID: RW28073</p>
+            </div>
+            <div class="profile-badges">
+              <div class="badge badge-success">✓ Verified</div>
+              <div class="badge badge-primary">💎 Premium</div>
+            </div>
+          </div>
+
+          <div class="profile-meta-info">
+            <div class="meta-item">
+              <div class="meta-icon">👤</div>
+              <div class="meta-content">
+                <h4>Age</h4>
+                <p>28 Years</p>
+              </div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">📏</div>
+              <div class="meta-content">
+                <h4>Height</h4>
+                <p>5' 4"</p>
+              </div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">📚</div>
+              <div class="meta-content">
+                <h4>Education</h4>
+                <p>MBA</p>
+              </div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">💼</div>
+              <div class="meta-content">
+                <h4>Profession</h4>
+                <p>Marketing Manager</p>
+              </div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">📍</div>
+              <div class="meta-content">
+                <h4>Location</h4>
+                <p>Rourkela, Odisha</p>
+              </div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-icon">👨‍👩‍👧‍👦</div>
+              <div class="meta-content">
+                <h4>Managed By</h4>
+                <p>Self</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div class="profile-description">
+          <strong>About Me:</strong><br>
+          "I'm a family-oriented, career-focused professional who enjoys travelling and exploring new cultures. I believe in building meaningful relationships based on mutual respect and shared values. Looking for someone who shares my passion for life and family."
+        </div>
+
+        <!-- ACCORDIONS -->
+        <div style="margin-top: var(--spacing-xl);">
+          <!-- BASIC DETAILS -->
+          <div class="accordion">
+            <button class="accordion-header active" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+              <span>Basic Details</span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body active">
+              <div class="accordion-grid">
+                <div class="accordion-item">
+                  <div class="item-label">Marital Status</div>
+                  <div class="item-value">Never Married</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Religion</div>
+                  <div class="item-value">Hinduism</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Caste</div>
+                  <div class="item-value">Rauniyar</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Mother Tongue</div>
+                  <div class="item-value">Hindi</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Diet</div>
+                  <div class="item-value">Vegetarian</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Blood Group</div>
+                  <div class="item-value">O+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EDUCATION & CAREER -->
+          <div class="accordion">
+            <button class="accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+              <span>Education & Career</span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-grid">
+                <div class="accordion-item">
+                  <div class="item-label">Education Level</div>
+                  <div class="item-value">Master's Degree</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Field of Study</div>
+                  <div class="item-value">Business Administration</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Profession</div>
+                  <div class="item-value">Marketing Manager</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Income Range</div>
+                  <div class="item-value">₹12 - 18 Lakhs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAMILY DETAILS -->
+          <div class="accordion">
+            <button class="accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+              <span>Family Details</span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-grid">
+                <div class="accordion-item">
+                  <div class="item-label">Father's Status</div>
+                  <div class="item-value">Retired</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Mother's Status</div>
+                  <div class="item-value">Homemaker</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Brothers</div>
+                  <div class="item-value">1 Married</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Sisters</div>
+                  <div class="item-value">None</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Family Type</div>
+                  <div class="item-value">Nuclear</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Living Status</div>
+                  <div class="item-value">Living with Parents</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LIFESTYLE -->
+          <div class="accordion">
+            <button class="accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+              <span>Lifestyle</span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-grid">
+                <div class="accordion-item">
+                  <div class="item-label">Hobbies</div>
+                  <div class="item-value">Travelling, Reading, Yoga</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Smoking</div>
+                  <div class="item-value">Never</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Drinking</div>
+                  <div class="item-value">Rarely</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Exercise Frequency</div>
+                  <div class="item-value">Regular</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PARTNER PREFERENCES -->
+          <div class="accordion">
+            <button class="accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+              <span>Partner Preferences</span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-grid">
+                <div class="accordion-item">
+                  <div class="item-label">Preferred Age</div>
+                  <div class="item-value">28 - 35 Years</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Preferred Height</div>
+                  <div class="item-value">5'8" and above</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Preferred Education</div>
+                  <div class="item-value">Bachelor's or Higher</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="item-label">Preferred Location</div>
+                  <div class="item-value">Any</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside>
+      <!-- CTA CARD -->
+      <div class="sidebar-card">
+        <div class="action-buttons">
+          <button class="action-btn primary" onclick="UI.showToast('Interest sent to Priya!')">
+            <i class="fas fa-heart"></i> Send Interest
+          </button>
+          <button class="action-btn secondary" onclick="UI.showToast('Added to shortlist!')">
+            <i class="fas fa-bookmark"></i> Save Profile
+          </button>
+          <button class="action-btn outline" onclick="UI.showToast('Message feature coming soon')">
+            <i class="fas fa-comment"></i> Message
+          </button>
+          <button class="action-btn outline" onclick="alert('Report profile functionality')">
+            <i class="fas fa-flag"></i> Report
+          </button>
+        </div>
+      </div>
+
+      <!-- VERIFICATION CARD -->
+      <div class="sidebar-card">
+        <h3>✓ Verification Info</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: var(--spacing-md);">This profile has been verified by our team for authenticity.</p>
+        <div style="display: flex; align-items: center; gap: var(--spacing-sm); font-size: 12px; color: var(--success);">
+          <i class="fas fa-check-circle"></i> Verified on Jan 2, 2026
+        </div>
+      </div>
+
+      <!-- SAFETY CARD -->
+      <div class="sidebar-card">
+        <h3>🛡️ Stay Safe</h3>
+        <div style="font-size: 12px; line-height: 1.6; color: var(--text-secondary);">
+          <p style="margin-bottom: var(--spacing-sm);"><strong>Do's:</strong></p>
+          <ul style="margin: 0; padding-left: 16px;">
+            <li>Get to know them first</li>
+            <li>Meet in public places</li>
+            <li>Inform family/friends</li>
+          </ul>
+          <p style="margin: var(--spacing-md) 0 var(--spacing-sm) 0;"><strong>Don'ts:</strong></p>
+          <ul style="margin: 0; padding-left: 16px;">
+            <li>Share financial info</li>
+            <li>Send money</li>
+            <li>Share personal documents</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SIMILAR PROFILES -->
+      <div class="sidebar-card">
+        <h3>Similar Profiles</h3>
+        <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+          <a href="#" style="padding: var(--spacing-sm); background-color: var(--surface-secondary); border-radius: var(--radius-md); font-size: 13px; color: var(--primary); font-weight: 600;">Neha Rauniyar, 26</a>
+          <a href="#" style="padding: var(--spacing-sm); background-color: var(--surface-secondary); border-radius: var(--radius-md); font-size: 13px; color: var(--primary); font-weight: 600;">Shreya Gupta, 25</a>
+          <a href="#" style="padding: var(--spacing-sm); background-color: var(--surface-secondary); border-radius: var(--radius-md); font-size: 13px; color: var(--primary); font-weight: 600;">Amrita Singh, 29</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-branding">
+      <h2 style="color: white; margin-bottom: 0;">Rauniyar Matrimony</h2>
+      <p class="footer-tagline">Where Traditions Meet New Beginnings</p>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h4>Platform</h4>
+        <a href="/">Home</a>
+        <a href="search.html">Find Matches</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Community</h4>
+        <a href="community.html">About Community</a>
+        <a href="success-stories.html">Success Stories</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Information</h4>
+        <a href="membership.html">Membership Plans</a>
+        <a href="safety.html">Safety & Trust</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Get In Touch</h4>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Email: info@rauniyarmatrimony.com</p>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Phone: +91 XXXX XXXX XX</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rauniyar Matrimony. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/app.js"></script>
+
+</body>
+</html>

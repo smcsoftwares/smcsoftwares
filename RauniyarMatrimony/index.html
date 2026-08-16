@@ -1,1895 +1,556 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Rauniyar Matrimony — Where Traditions Meet New Beginnings</title>
-
-    <meta name="description"
-          content="Rauniyar Matrimony — A modern matrimonial platform for the Rauniyar community. Where traditions meet new beginnings.">
-
-    <meta name="theme-color" content="#641b32">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <style>
-        /* =========================================================
-           ROOT
-        ========================================================= */
-
-        :root {
-            --primary: #681d36;
-            --primary-dark: #421123;
-            --gold: #c49a57;
-            --gold-light: #dfc38e;
-
-            --cream: #faf7f1;
-            --cream-dark: #f1e9dd;
-            --white: #ffffff;
-
-            --text: #272326;
-            --muted: #756d6e;
-            --border: rgba(104, 29, 54, 0.12);
-
-            --shadow: 0 20px 60px rgba(54, 20, 32, 0.12);
-
-            --serif: "DM Serif Display", Georgia, serif;
-            --sans: "Inter", Arial, sans-serif;
-        }
-
-        /* =========================================================
-           RESET
-        ========================================================= */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--sans);
-            color: var(--text);
-            background: var(--cream);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* =========================================================
-           UTILITIES
-        ========================================================= */
-
-        .container {
-            width: min(1180px, calc(100% - 40px));
-            margin: auto;
-        }
-
-        .section {
-            padding: 110px 0;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-
-            color: var(--gold);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .eyebrow::before,
-        .eyebrow::after {
-            content: "";
-            width: 25px;
-            height: 1px;
-            background: var(--gold);
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: var(--serif);
-            font-weight: 400;
-            line-height: 1.1;
-        }
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            color: white;
-        }
-
-        .nav {
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-mark {
-            width: 42px;
-            height: 42px;
-
-            display: grid;
-            place-items: center;
-
-            border: 1px solid rgba(255,255,255,.6);
-            border-radius: 50%;
-
-            color: var(--gold-light);
-            font-family: var(--serif);
-            font-size: 20px;
-        }
-
-        .logo-text strong {
-            display: block;
-            font-size: 17px;
-            letter-spacing: 1.5px;
-        }
-
-        .logo-text span {
-            display: block;
-            font-size: 8px;
-            letter-spacing: 3px;
-            opacity: .7;
-            margin-top: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-        }
-
-        .nav-links a {
-            font-size: 13px;
-            color: rgba(255,255,255,.85);
-            transition: .3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .nav-button {
-            padding: 11px 20px;
-            border: 1px solid rgba(255,255,255,.5);
-            border-radius: 30px;
-        }
-
-        .menu-button {
-            display: none;
-            background: none;
-            border: 0;
-            color: white;
-            font-size: 25px;
-            cursor: pointer;
-        }
-
-        /* =========================================================
-           HERO
-        ========================================================= */
-
-        .hero {
-            min-height: 100vh;
-            position: relative;
-
-            display: flex;
-            align-items: center;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(35, 8, 19, .92) 0%,
-                    rgba(55, 13, 28, .78) 43%,
-                    rgba(55, 13, 28, .28) 100%
-                ),
-                url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=85")
-                center / cover;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-
-            background:
-                radial-gradient(
-                    circle at 20% 80%,
-                    rgba(196,154,87,.12),
-                    transparent 30%
-                );
-
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            width: min(720px, 100%);
-            padding-top: 70px;
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 6vw, 82px);
-            margin: 25px 0;
-            letter-spacing: -1px;
-        }
-
-        .hero h1 span {
-            color: var(--gold-light);
-        }
-
-        .hero-description {
-            max-width: 590px;
-            color: rgba(255,255,255,.78);
-            font-size: 17px;
-            line-height: 1.8;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 38px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            border: 0;
-            cursor: pointer;
-
-            padding: 14px 26px;
-            border-radius: 30px;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            transition: .3s;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: #29170e;
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 1px solid rgba(255,255,255,.4);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255,255,255,.1);
-        }
-
-        /* =========================================================
-           COUNTDOWN
-        ========================================================= */
-
-        .countdown-wrapper {
-            margin-top: 65px;
-        }
-
-        .countdown-label {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,.55);
-            margin-bottom: 14px;
-        }
-
-        .countdown {
-            display: flex;
-            gap: 28px;
-        }
-
-        .countdown-item {
-            min-width: 65px;
-        }
-
-        .countdown-number {
-            font-family: var(--serif);
-            font-size: 38px;
-            color: white;
-        }
-
-        .countdown-unit {
-            display: block;
-            color: rgba(255,255,255,.5);
-            font-size: 9px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* =========================================================
-           INTRO
-        ========================================================= */
-
-        .intro {
-            text-align: center;
-            max-width: 780px;
-            margin: auto;
-        }
-
-        .intro h2 {
-            font-size: clamp(38px, 5vw, 58px);
-            color: var(--primary);
-            margin: 22px 0;
-        }
-
-        .intro p {
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1.9;
-        }
-
-        /* =========================================================
-           MAGAZINE STORY
-        ========================================================= */
-
-        .story-section {
-            background: var(--white);
-        }
-
-        .story-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 70px;
-            align-items: center;
-        }
-
-        .story-image {
-            position: relative;
-        }
-
-        .story-image img {
-            width: 100%;
-            height: 580px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .story-image::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 1px solid var(--gold);
-            top: 18px;
-            left: 18px;
-            z-index: 0;
-        }
-
-        .story-image img {
-            position: relative;
-            z-index: 1;
-        }
-
-        .story-content h2 {
-            font-size: clamp(40px, 5vw, 58px);
-            color: var(--primary);
-            margin: 20px 0;
-        }
-
-        .story-content p {
-            color: var(--muted);
-            line-height: 1.9;
-            margin-bottom: 20px;
-        }
-
-        .timeline {
-            margin-top: 35px;
-            border-left: 1px solid var(--gold);
-            padding-left: 25px;
-        }
-
-        .timeline-item {
-            margin-bottom: 28px;
-        }
-
-        .timeline-item strong {
-            display: block;
-            color: var(--primary);
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-
-        .timeline-item span {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        /* =========================================================
-           FEATURES
-        ========================================================= */
-
-        .features-section {
-            background: var(--cream);
-        }
-
-        .section-heading {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 60px;
-        }
-
-        .section-heading h2 {
-            color: var(--primary);
-            font-size: clamp(38px, 5vw, 56px);
-            margin: 20px 0;
-        }
-
-        .section-heading p {
-            color: var(--muted);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .feature {
-            background: white;
-            padding: 35px 28px;
-            border: 1px solid var(--border);
-            transition: .35s;
-        }
-
-        .feature:hover {
-            transform: translateY(-7px);
-            box-shadow: var(--shadow);
-        }
-
-        .feature-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-
-            display: grid;
-            place-items: center;
-
-            background: var(--cream);
-            color: var(--primary);
-
-            font-size: 20px;
-            margin-bottom: 25px;
-        }
-
-        .feature h3 {
-            color: var(--primary);
-            font-size: 25px;
-            margin-bottom: 12px;
-        }
-
-        .feature p {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        /* =========================================================
-           FAMILY SECTION
-        ========================================================= */
-
-        .family-section {
-            background: var(--primary);
-            color: white;
-        }
-
-        .family-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .family-content h2 {
-            font-size: clamp(40px, 5vw, 58px);
-            margin: 20px 0;
-        }
-
-        .family-content p {
-            color: rgba(255,255,255,.7);
-            line-height: 1.9;
-            margin-bottom: 35px;
-        }
-
-        .family-points {
-            display: grid;
-            gap: 18px;
-        }
-
-        .family-point {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .family-point-icon {
-            width: 34px;
-            height: 34px;
-            flex-shrink: 0;
-
-            display: grid;
-            place-items: center;
-
-            border: 1px solid rgba(196,154,87,.5);
-            border-radius: 50%;
-
-            color: var(--gold-light);
-        }
-
-        .family-point strong {
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .family-point span {
-            color: rgba(255,255,255,.6);
-            font-size: 13px;
-        }
-
-        .family-visual {
-            position: relative;
-            min-height: 480px;
-        }
-
-        .family-card {
-            position: absolute;
-            background: white;
-            color: var(--text);
-            padding: 35px;
-
-            width: 330px;
-
-            box-shadow: 0 30px 70px rgba(0,0,0,.25);
-        }
-
-        .family-card.one {
-            top: 20px;
-            right: 80px;
-        }
-
-        .family-card.two {
-            bottom: 30px;
-            left: 20px;
-            background: var(--gold);
-            color: #29170e;
-        }
-
-        .family-card h3 {
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
-
-        .family-card p {
-            font-size: 13px;
-            line-height: 1.8;
-            opacity: .75;
-        }
-
-        /* =========================================================
-           WAITLIST
-        ========================================================= */
-
-        .waitlist-section {
-            background: var(--cream-dark);
-        }
-
-        .waitlist-card {
-            max-width: 900px;
-            margin: auto;
-
-            background: white;
-            padding: 70px;
-
-            text-align: center;
-
-            box-shadow: var(--shadow);
-            border-top: 3px solid var(--gold);
-        }
-
-        .waitlist-card h2 {
-            color: var(--primary);
-            font-size: clamp(40px, 5vw, 58px);
-            margin: 20px 0;
-        }
-
-        .waitlist-card p {
-            color: var(--muted);
-            max-width: 580px;
-            margin: 0 auto 35px;
-        }
-
-        .form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            text-align: left;
-        }
-
-        .form input {
-            width: 100%;
-            border: 1px solid var(--border);
-            padding: 15px 18px;
-            outline: none;
-            background: #fffdfa;
-            border-radius: 3px;
-        }
-
-        .form input:focus {
-            border-color: var(--gold);
-        }
-
-        .form .full {
-            grid-column: 1 / -1;
-        }
-
-        .form-submit {
-            grid-column: 1 / -1;
-            margin-top: 5px;
-        }
-
-        .form-submit button {
-            width: 100%;
-        }
-
-        .agreement {
-            grid-column: 1 / -1;
-            font-size: 11px;
-            color: var(--muted);
-        }
-
-        .success-message {
-            display: none;
-            padding: 35px;
-            background: #f4f8f1;
-            color: #436034;
-        }
-
-        /* =========================================================
-           QUOTE
-        ========================================================= */
-
-        .quote-section {
-            background:
-                linear-gradient(
-                    rgba(63, 14, 31, .95),
-                    rgba(63, 14, 31, .95)
-                ),
-                url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80")
-                center / cover;
-
-            text-align: center;
-            color: white;
-        }
-
-        .quote-section blockquote {
-            max-width: 900px;
-            margin: auto;
-            font-family: var(--serif);
-            font-size: clamp(38px, 5vw, 65px);
-            line-height: 1.2;
-        }
-
-        .quote-section p {
-            margin-top: 30px;
-            color: rgba(255,255,255,.6);
-        }
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        footer {
-            background: #291018;
-            color: white;
-            padding: 60px 0 25px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 50px;
-        }
-
-        .footer-brand p {
-            color: rgba(255,255,255,.5);
-            max-width: 320px;
-            margin-top: 20px;
-            font-size: 13px;
-        }
-
-        footer h4 {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold-light);
-            margin-bottom: 18px;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer li {
-            margin-bottom: 10px;
-        }
-
-        footer li a {
-            font-size: 13px;
-            color: rgba(255,255,255,.55);
-        }
-
-        footer li a:hover {
-            color: white;
-        }
-
-        .copyright {
-            border-top: 1px solid rgba(255,255,255,.1);
-            padding-top: 22px;
-
-            display: flex;
-            justify-content: space-between;
-
-            color: rgba(255,255,255,.4);
-            font-size: 11px;
-        }
-
-        /* =========================================================
-           MOBILE CTA
-        ========================================================= */
-
-        .mobile-cta {
-            display: none;
-        }
-
-        /* =========================================================
-           ANIMATIONS
-        ========================================================= */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity .8s ease, transform .8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 900px) {
-
-            .nav-links {
-                display: none;
-            }
-
-            .menu-button {
-                display: block;
-            }
-
-            .features {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .story-grid,
-            .family-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .family-visual {
-                min-height: 420px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: min(100% - 28px, 1180px);
-            }
-
-            .section {
-                padding: 75px 0;
-            }
-
-            header {
-                position: absolute;
-            }
-
-            .nav {
-                height: 75px;
-            }
-
-            .hero {
-                min-height: 100svh;
-                background-position: 62% center;
-            }
-
-            .hero-content {
-                padding-top: 60px;
-            }
-
-            .hero h1 {
-                font-size: 49px;
-            }
-
-            .hero-description {
-                font-size: 14px;
-            }
-
-            .countdown {
-                gap: 15px;
-            }
-
-            .countdown-item {
-                min-width: 52px;
-            }
-
-            .countdown-number {
-                font-size: 29px;
-            }
-
-            .story-image img {
-                height: 400px;
-            }
-
-            .story-image::before {
-                top: 10px;
-                left: 10px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .family-card {
-                width: 270px;
-                padding: 25px;
-            }
-
-            .family-card.one {
-                right: 0;
-            }
-
-            .family-card.two {
-                left: 0;
-            }
-
-            .waitlist-card {
-                padding: 40px 22px;
-            }
-
-            .form {
-                grid-template-columns: 1fr;
-            }
-
-            .form .full,
-            .form-submit,
-            .agreement {
-                grid-column: auto;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
-            }
-
-            .copyright {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .mobile-cta {
-                display: block;
-
-                position: fixed;
-                bottom: 15px;
-                left: 15px;
-                right: 15px;
-
-                z-index: 999;
-            }
-
-            .mobile-cta button {
-                width: 100%;
-                box-shadow: 0 10px 30px rgba(0,0,0,.25);
-            }
-        }
-
-        /* =========================================================
-           REDUCED MOTION
-        ========================================================= */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: .01ms !important;
-                transition-duration: .01ms !important;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rauniyar Matrimony - Find your perfect match. A trusted matrimonial platform for the Rauniyar community.">
+  <meta name="keywords" content="matrimony, matrimonial, Rauniyar, marriage, alliance">
+  <meta property="og:title" content="Rauniyar Matrimony - Where Traditions Meet New Beginnings">
+  <meta property="og:description" content="Find a partner and build a family. Continue the tradition with Rauniyar Matrimony.">
+  
+  <title>Rauniyar Matrimony - Find Your Perfect Match</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-<!-- =============================================================
-     HEADER
-============================================================= -->
-
+<!-- ====================================
+     HEADER & NAVIGATION
+     ==================================== -->
 <header>
-
-    <div class="container nav">
-
-        <a href="#" class="logo">
-
-            <div class="logo-mark">
-                R
-            </div>
-
-            <div class="logo-text">
-                <strong>RAUNIYAR</strong>
-                <span>MATRIMONY</span>
-            </div>
-
-        </a>
-
-        <nav class="nav-links">
-
-            <a href="#story">Our Story</a>
-            <a href="#features">What's Coming</a>
-            <a href="#family">For Families</a>
-            <a href="#waitlist" class="nav-button">Join Waitlist</a>
-
-        </nav>
-
-        <button class="menu-button" aria-label="Open menu">
-            ☰
-        </button>
-
+  <div class="header-container">
+    <a href="/" class="logo">
+      <div class="logo-icon">❤️</div>
+      <span>Rauniyar<br>Matrimony</span>
+    </a>
+    
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="pages/search.html">Find Matches</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="pages/community.html">Community</a>
+      <a href="#success-stories">Success Stories</a>
+    </nav>
+    
+    <div class="nav-right">
+      <a href="pages/login.html" class="btn btn-outline btn-sm">Login</a>
+      <a href="pages/register.html" class="btn btn-primary btn-sm">Register</a>
+      <button class="mobile-menu-btn">☰</button>
     </div>
-
+  </div>
 </header>
 
-
-<!-- =============================================================
-     HERO
-============================================================= -->
-
+<!-- ====================================
+     HERO SECTION
+     ==================================== -->
 <section class="hero">
-
-    <div class="container">
-
-        <div class="hero-content reveal">
-
-            <div class="eyebrow">
-                Rauniyar Matrimony
-            </div>
-
-            <h1>
-                A New Beginning<br>
-                for a <span>Timeless Tradition.</span>
-            </h1>
-
-            <p class="hero-description">
-                The trusted Rauniyar matrimonial tradition is coming
-                to the digital world — bringing families, values and
-                meaningful connections together in one modern platform.
-            </p>
-
-            <div class="hero-actions">
-
-                <a href="#waitlist" class="btn btn-primary">
-                    JOIN THE WAITLIST
-                </a>
-
-                <a href="#story" class="btn btn-outline">
-                    OUR STORY
-                </a>
-
-            </div>
-
-
-            <div class="countdown-wrapper">
-
-                <div class="countdown-label">
-                    We're getting ready
-                </div>
-
-                <div class="countdown">
-
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="days">00</span>
-                        <span class="countdown-unit">Days</span>
-                    </div>
-
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hours">00</span>
-                        <span class="countdown-unit">Hours</span>
-                    </div>
-
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">00</span>
-                        <span class="countdown-unit">Minutes</span>
-                    </div>
-
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">00</span>
-                        <span class="countdown-unit">Seconds</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+  <div class="container">
+    <div class="hero-content">
+      <h1>Find a Partner. Build a Family. Continue the Tradition.</h1>
+      <p>A modern matrimonial platform that preserves the trust and values of the Rauniyar community while connecting you to meaningful relationships.</p>
+      <div class="hero-actions">
+        <a href="pages/search.html" class="btn btn-secondary btn-lg">Explore Profiles</a>
+        <a href="pages/register.html" class="btn btn-outline btn-lg" style="border-color: white; color: white;">Create Profile</a>
+      </div>
     </div>
-
+  </div>
 </section>
 
-
-<!-- =============================================================
-     INTRO
-============================================================= -->
-
-<section class="section">
-
-    <div class="container">
-
-        <div class="intro reveal">
-
-            <div class="eyebrow">
-                A New Chapter
-            </div>
-
-            <h2>
-                From the pages of a magazine
-                to the world of digital.
-            </h2>
-
-            <p>
-                For generations, matrimonial connections have been
-                built through families, communities and trusted
-                introductions. Rauniyar Matrimony is bringing that
-                tradition into a new era.
-            </p>
-
+<!-- ====================================
+     QUICK SEARCH
+     ==================================== -->
+<section class="section-white">
+  <div class="container">
+    <div class="search-box">
+      <h3 style="margin-bottom: var(--spacing-lg); color: var(--primary);">Search Matrimonial Profiles</h3>
+      <div class="search-grid">
+        <div class="search-field">
+          <label for="search-gender">Looking For</label>
+          <select id="search-gender" data-filter="gender">
+            <option value="">Select Gender</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
         </div>
-
+        <div class="search-field">
+          <label for="search-age">Age Range</label>
+          <select id="search-age" data-filter="age">
+            <option value="">Select Age</option>
+            <option value="20-25">20 - 25</option>
+            <option value="25-30">25 - 30</option>
+            <option value="30-35">30 - 35</option>
+            <option value="35-40">35 - 40</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="search-location">Location</label>
+          <select id="search-location" data-filter="location">
+            <option value="">Select City</option>
+            <option value="rourkela">Rourkela</option>
+            <option value="bhubaneswar">Bhubaneswar</option>
+            <option value="kolkata">Kolkata</option>
+            <option value="delhi">Delhi</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="bangalore">Bangalore</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="search-education">Education</label>
+          <select id="search-education">
+            <option value="">Select Education</option>
+            <option value="btech">B.Tech</option>
+            <option value="mba">MBA</option>
+            <option value="mtech">M.Tech</option>
+            <option value="bcom">B.Com</option>
+            <option value="ba">B.A</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg" onclick="window.location.href='pages/search.html'">Search Profiles</button>
     </div>
-
+  </div>
 </section>
 
-
-<!-- =============================================================
-     STORY
-============================================================= -->
-
-<section class="section story-section" id="story">
-
-    <div class="container">
-
-        <div class="story-grid">
-
-            <div class="story-image reveal">
-
-                <img
-                    src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1000&q=85"
-                    alt="Indian wedding couple"
-                >
-
-            </div>
-
-
-            <div class="story-content reveal">
-
-                <div class="eyebrow">
-                    Our Journey
-                </div>
-
-                <h2>
-                    From Pages<br>
-                    to Profiles.
-                </h2>
-
-                <p>
-                    What once lived between the pages of a matrimonial
-                    magazine is now ready to become a living,
-                    connected digital community.
-                </p>
-
-                <p>
-                    A place where individuals can discover each other,
-                    where parents can participate, and where families
-                    can continue the traditions that matter to them.
-                </p>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-                        <strong>Then — The Magazine</strong>
-                        <span>
-                            Printed profiles, photographs and family introductions.
-                        </span>
-                    </div>
-
-                    <div class="timeline-item">
-                        <strong>Today — The Digital Community</strong>
-                        <span>
-                            Profiles, discovery, connections and trusted information.
-                        </span>
-                    </div>
-
-                    <div class="timeline-item">
-                        <strong>Tomorrow — Meaningful Beginnings</strong>
-                        <span>
-                            A modern matrimonial experience for the next generation.
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+<!-- ====================================
+     FEATURED PROFILES
+     ==================================== -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Matrimonial Profiles</h2>
+      <p>Meet our most popular members from the Rauniyar community</p>
     </div>
-
+    <div class="profiles-grid" id="featured-profiles"></div>
+    <div style="text-align: center; margin-top: var(--spacing-2xl);">
+      <a href="pages/search.html" class="btn btn-primary btn-lg">View All Profiles</a>
+    </div>
+  </div>
 </section>
 
-
-<!-- =============================================================
-     FEATURES
-============================================================= -->
-
-<section class="section features-section" id="features">
-
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <div class="eyebrow">
-                What's Coming
-            </div>
-
-            <h2>
-                Built around what matters.
-            </h2>
-
-            <p>
-                A modern matrimonial experience designed
-                with individuals, parents and families in mind.
-            </p>
-
-        </div>
-
-
-        <div class="features">
-
-            <div class="feature reveal">
-
-                <div class="feature-icon">⌕</div>
-
-                <h3>Discover</h3>
-
-                <p>
-                    Explore matrimonial profiles from the
-                    Rauniyar community based on what matters
-                    to you and your family.
-                </p>
-
-            </div>
-
-
-            <div class="feature reveal">
-
-                <div class="feature-icon">♡</div>
-
-                <h3>Connect</h3>
-
-                <p>
-                    Express interest and create meaningful
-                    connections with individuals and families.
-                </p>
-
-            </div>
-
-
-            <div class="feature reveal">
-
-                <div class="feature-icon">✓</div>
-
-                <h3>Trust</h3>
-
-                <p>
-                    A community-focused platform designed
-                    around responsible profiles and verification.
-                </p>
-
-            </div>
-
-
-            <div class="feature reveal">
-
-                <div class="feature-icon">♧</div>
-
-                <h3>Belong</h3>
-
-                <p>
-                    A digital space created specifically for
-                    the Rauniyar community and its families.
-                </p>
-
-            </div>
-
-        </div>
-
+<!-- ====================================
+     COMMUNITY STATISTICS
+     ==================================== -->
+<section class="section-white">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Community by Numbers</h2>
+      <p>Trusted by thousands of Rauniyar families across India</p>
     </div>
-
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">15,000+</div>
+        <div class="stat-label">Active Members</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2,500+</div>
+        <div class="stat-label">Successful Matches</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">350+</div>
+        <div class="stat-label">Success Stories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">Member Satisfaction</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- =============================================================
-     FAMILY
-============================================================= -->
-
-<section class="section family-section" id="family">
-
-    <div class="container">
-
-        <div class="family-grid">
-
-            <div class="family-content reveal">
-
-                <div class="eyebrow">
-                    For Everyone
-                </div>
-
-                <h2>
-                    Made for Families.
-                    Built for the Next Generation.
-                </h2>
-
-                <p>
-                    Whether you're searching for yourself, your son,
-                    daughter, brother, sister or another family member,
-                    Rauniyar Matrimony is being designed to make the
-                    journey simpler, safer and more meaningful.
-                </p>
-
-                <div class="family-points">
-
-                    <div class="family-point">
-
-                        <div class="family-point-icon">♡</div>
-
-                        <div>
-                            <strong>For You</strong>
-                            <span>
-                                Find someone who shares your values and aspirations.
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="family-point">
-
-                        <div class="family-point-icon">⌂</div>
-
-                        <div>
-                            <strong>For Parents</strong>
-                            <span>
-                                A simple and trustworthy way to explore profiles.
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="family-point">
-
-                        <div class="family-point-icon">∞</div>
-
-                        <div>
-                            <strong>For Families</strong>
-                            <span>
-                                Keep family involvement and traditions at the heart
-                                of the journey.
-                            </span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="family-visual reveal">
-
-                <div class="family-card one">
-
-                    <h3>
-                        Tradition
-                    </h3>
-
-                    <p>
-                        Rooted in community, family values
-                        and generations of connections.
-                    </p>
-
-                </div>
-
-
-                <div class="family-card two">
-
-                    <h3>
-                        New Beginnings
-                    </h3>
-
-                    <p>
-                        A modern way to discover the person
-                        with whom your next chapter begins.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
+<!-- ====================================
+     WHY CHOOSE US
+     ==================================== -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why Choose Rauniyar Matrimony?</h2>
+      <p>We combine tradition with modern technology</p>
     </div>
-
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>100% Verified Profiles</h3>
+        <p>Every profile is manually verified to ensure authenticity and safety of our community members.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+        <h3>Community-Driven</h3>
+        <p>Built by and for the Rauniyar community, preserving our values and traditions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Secure & Private</h3>
+        <p>Your privacy is our priority. All data is encrypted and securely managed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Smart Matching</h3>
+        <p>Our intelligent matching system helps you find compatible profiles based on your preferences.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Easy Communication</h3>
+        <p>Send interests, messages, and connect with potential matches securely.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile-First Design</h3>
+        <p>Find your match on the go with our optimized mobile and web experience.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- =============================================================
-     WAITLIST
-============================================================= -->
-
-<section class="section waitlist-section" id="waitlist">
-
-    <div class="container">
-
-        <div class="waitlist-card reveal">
-
-            <div class="eyebrow">
-                Early Access
-            </div>
-
-            <h2>
-                Be Among the First.
-            </h2>
-
-            <p>
-                Join the Rauniyar Matrimony launch list and
-                be notified when we open our doors.
-            </p>
-
-
-            <form class="form" id="waitlistForm">
-
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Full Name"
-                    required
-                >
-
-                <input
-                    type="tel"
-                    id="phone"
-                    placeholder="Mobile Number"
-                    required
-                >
-
-                <input
-                    class="full"
-                    type="email"
-                    id="email"
-                    placeholder="Email Address"
-                    required
-                >
-
-                <input
-                    class="full"
-                    type="text"
-                    id="city"
-                    placeholder="City"
-                >
-
-                <label class="agreement">
-
-                    <input
-                        type="checkbox"
-                        id="agreement"
-                        required
-                    >
-
-                    I agree to receive Rauniyar Matrimony
-                    launch updates.
-
-                </label>
-
-                <div class="form-submit">
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                    >
-                        JOIN THE WAITLIST
-                    </button>
-
-                </div>
-
-            </form>
-
-
-            <div class="success-message" id="successMessage">
-
-                <h3>
-                    You're on the list.
-                </h3>
-
-                <p>
-                    Thank you for joining us.
-                    We'll let you know when Rauniyar Matrimony
-                    is ready for you.
-                </p>
-
-            </div>
-
-        </div>
-
+<!-- ====================================
+     HOW IT WORKS
+     ==================================== -->
+<section class="section-white" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>Simple steps to find your perfect match</p>
     </div>
-
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Create Profile</h3>
+        <p>Register and create a detailed matrimonial profile with photos and preferences.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Get Verified</h3>
+        <p>Our team verifies your profile to ensure authenticity and community standards.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Browse & Match</h3>
+        <p>Explore profiles and receive smart matches based on your preferences.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Connect</h3>
+        <p>Send interests, message matches, and plan to meet the right person.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <h3>Build Relationship</h3>
+        <p>Get to know each other and take the relationship forward at your pace.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- =============================================================
-     QUOTE
-============================================================= -->
-
-<section class="section quote-section">
-
-    <div class="container">
-
-        <div class="reveal">
-
-            <blockquote>
-                "Tradition connects us.
-                Technology brings us closer."
-            </blockquote>
-
-            <p>
-                RAUNIYAR MATRIMONY
-            </p>
-
-        </div>
-
+<!-- ====================================
+     MAGAZINE LEGACY (Unique Differentiator)
+     ==================================== -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>From Magazine to Digital</h2>
+      <p>The Evolution of Rauniyar Matrimonial Traditions</p>
     </div>
-
+    <div style="background-color: white; padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); margin-bottom: var(--spacing-lg);">
+      <h3 style="text-align: center; color: var(--primary); margin-bottom: var(--spacing-lg);">The Rauniyar Matrimonial Journey</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); text-align: center;">
+        <div>
+          <div style="font-size: 40px; margin-bottom: var(--spacing-sm);">📰</div>
+          <h4>Printed Magazine</h4>
+          <p style="font-size: 13px; color: var(--text-secondary);">Trusted source for generations</p>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; color: var(--secondary);">→</span>
+        </div>
+        <div>
+          <div style="font-size: 40px; margin-bottom: var(--spacing-sm);">📂</div>
+          <h4>Directory</h4>
+          <p style="font-size: 13px; color: var(--text-secondary);">Centralized profiles</p>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; color: var(--secondary);">→</span>
+        </div>
+        <div>
+          <div style="font-size: 40px; margin-bottom: var(--spacing-sm);">💻</div>
+          <h4>Digital Platform</h4>
+          <p style="font-size: 13px; color: var(--text-secondary);">Modern accessibility</p>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; color: var(--secondary);">→</span>
+        </div>
+        <div>
+          <div style="font-size: 40px; margin-bottom: var(--spacing-sm);">🤖</div>
+          <h4>Smart Matching</h4>
+          <p style="font-size: 13px; color: var(--text-secondary);">AI-powered connections</p>
+        </div>
+      </div>
+    </div>
+    <p style="text-align: center; color: var(--text-secondary); font-style: italic; margin-bottom: var(--spacing-lg);">For generations, the Rauniyar community has trusted printed matrimonial magazines to help families find suitable matches. Today, we bring that same trust and values to a modern digital platform.</p>
+    <div style="text-align: center;">
+      <a href="pages/community.html" class="btn btn-primary">Learn Our Story</a>
+    </div>
+  </div>
 </section>
 
+<!-- ====================================
+     SUCCESS STORIES
+     ==================================== -->
+<section class="section-white" id="success-stories">
+  <div class="container">
+    <div class="section-header">
+      <h2>Success Stories</h2>
+      <p>Real love stories from our community</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div style="padding-bottom: 60%; background-color: var(--surface-secondary); border-radius: var(--radius-lg); margin-bottom: var(--spacing-lg); position: relative;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-size: 48px;">💑</div>
+        </div>
+        <h3>Rohan & Priya</h3>
+        <p><strong>Location:</strong> Rourkela, Odisha</p>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: var(--spacing-md);">"We connected through Rauniyar Matrimony in 2023. The platform made it so easy to find someone with similar values and family background. Today, we're happily married!"</p>
+        <p><strong style="color: var(--primary);">Wedding Date: March 2024</strong></p>
+      </div>
+      <div class="card">
+        <div style="padding-bottom: 60%; background-color: var(--surface-secondary); border-radius: var(--radius-lg); margin-bottom: var(--spacing-lg); position: relative;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-size: 48px;">💑</div>
+        </div>
+        <h3>Ankit & Neha</h3>
+        <p><strong>Location:</strong> Delhi, Delhi</p>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: var(--spacing-md);">"As someone working abroad, I was skeptical about matrimony platforms. But Rauniyar Matrimony proved to be trustworthy and efficient. Best decision ever!"</p>
+        <p><strong style="color: var(--primary);">Wedding Date: November 2024</strong></p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: var(--spacing-2xl);">
+      <a href="pages/success-stories.html" class="btn btn-outline">View All Success Stories</a>
+    </div>
+  </div>
+</section>
 
-<!-- =============================================================
+<!-- ====================================
+     MEMBERSHIP PLANS (Quick View)
+     ==================================== -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Choose Your Plan</h2>
+      <p>Start free, upgrade when you're ready</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card" style="border: 2px solid var(--border);">
+        <h3 style="color: var(--primary); margin-bottom: var(--spacing-md);">Free</h3>
+        <ul style="list-style: none; margin-bottom: var(--spacing-lg);">
+          <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); font-size: 14px;">✓ Create profile</li>
+          <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); font-size: 14px;">✓ Browse profiles</li>
+          <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); font-size: 14px;">✓ Basic matching</li>
+          <li style="padding: var(--spacing-sm) 0; font-size: 14px; color: var(--text-muted);">✗ Send messages</li>
+        </ul>
+        <button class="btn btn-outline btn-lg" style="width: 100%;">Get Started</button>
+      </div>
+      <div class="card" style="border: 2px solid var(--primary); position: relative;">
+        <div style="position: absolute; top: -12px; right: 20px; background-color: var(--primary); color: white; padding: 4px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600;">POPULAR</div>
+        <h3 style="color: var(--primary); margin-bottom: var(--spacing-md);">Premium</h3>
+        <div style="font-size: 24px; color: var(--primary); font-weight: 700; margin-bottom: var(--spacing-md);">₹999<span style="font-size: 14px; color: var(--text-muted);">/month</span></div>
+        <ul style="list-style: none; margin-bottom: var(--spacing-lg);">
+          <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); font-size: 14px;">✓ Everything in Free</li>
+          <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); font-size: 14px;">✓ Send unlimited messages</li>
+          <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border); font-size: 14px;">✓ Priority visibility</li>
+          <li style="padding: var(--spacing-sm) 0; font-size: 14px;">✓ Dedicated support</li>
+        </ul>
+        <button class="btn btn-primary btn-lg" style="width: 100%;">Upgrade Now</button>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: var(--spacing-2xl);">
+      <a href="pages/membership.html" class="btn btn-ghost">View All Plans</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================
+     SAFETY & TRUST
+     ==================================== -->
+<section class="section-white">
+  <div class="container">
+    <div class="section-header">
+      <h2>Safety & Trust</h2>
+      <p>Your safety is our top priority</p>
+    </div>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Profile Verification</h3>
+        <p>All profiles are manually verified for authenticity and quality.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Data Security</h3>
+        <p>Bank-level encryption protects your personal information.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Privacy Control</h3>
+        <p>You control who sees your profile and your personal information.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Report System</h3>
+        <p>Report suspicious activity and we'll investigate immediately.</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: var(--spacing-2xl);">
+      <a href="pages/safety.html" class="btn btn-outline">Learn About Safety</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================
+     CTA SECTION
+     ==================================== -->
+<section class="section-accent" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+  <div class="container">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+      <h2 style="color: white;">Ready to Find Your Perfect Match?</h2>
+      <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: var(--spacing-xl);">Join thousands of Rauniyar families who have found love and happiness through our platform.</p>
+      <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+        <a href="pages/register.html" class="btn btn-secondary btn-lg">Create Profile Today</a>
+        <a href="pages/search.html" class="btn btn-outline btn-lg" style="border-color: white; color: white;">Browse Profiles</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================
+     FAQ
+     ==================================== -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div style="max-width: 700px; margin: 0 auto;">
+      <div class="card" style="margin-bottom: var(--spacing-lg);">
+        <div class="accordion-header" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.parentElement.classList.toggle('active')">
+          <h4 style="margin: 0; color: var(--primary);">Is my profile information safe?</h4>
+          <span style="font-size: 20px; color: var(--primary);">+</span>
+        </div>
+        <div class="accordion-body" style="display: none; padding-top: var(--spacing-md); border-top: 1px solid var(--border); margin-top: var(--spacing-md);">
+          <p>Yes, we use bank-level encryption to protect your personal information. You also have full control over your privacy settings.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--spacing-lg);">
+        <div class="accordion-header" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.parentElement.classList.toggle('active')">
+          <h4 style="margin: 0; color: var(--primary);">How long does profile verification take?</h4>
+          <span style="font-size: 20px; color: var(--primary);">+</span>
+        </div>
+        <div class="accordion-body" style="display: none; padding-top: var(--spacing-md); border-top: 1px solid var(--border); margin-top: var(--spacing-md);">
+          <p>Typically, profile verification takes 24-48 hours. You'll be notified via email once your profile is approved.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--spacing-lg);">
+        <div class="accordion-header" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.parentElement.classList.toggle('active')">
+          <h4 style="margin: 0; color: var(--primary);">Can I delete my account?</h4>
+          <span style="font-size: 20px; color: var(--primary);">+</span>
+        </div>
+        <div class="accordion-body" style="display: none; padding-top: var(--spacing-md); border-top: 1px solid var(--border); margin-top: var(--spacing-md);">
+          <p>Yes, you can delete your account anytime from your settings. Your data will be permanently removed from our servers.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="accordion-header" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.parentElement.classList.toggle('active')">
+          <h4 style="margin: 0; color: var(--primary);">What's the success rate?</h4>
+          <span style="font-size: 20px; color: var(--primary);">+</span>
+        </div>
+        <div class="accordion-body" style="display: none; padding-top: var(--spacing-md); border-top: 1px solid var(--border); margin-top: var(--spacing-md);">
+          <p>We have successfully facilitated over 2,500 matches in the Rauniyar community with a 95% member satisfaction rate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================
      FOOTER
-============================================================= -->
-
+     ==================================== -->
 <footer>
-
-    <div class="container">
-
-        <div class="footer-grid">
-
-            <div class="footer-brand">
-
-                <div class="logo">
-
-                    <div class="logo-mark">
-                        R
-                    </div>
-
-                    <div class="logo-text">
-
-                        <strong>RAUNIYAR</strong>
-
-                        <span>MATRIMONY</span>
-
-                    </div>
-
-                </div>
-
-                <p>
-                    Where traditions meet new beginnings.
-                    A modern matrimonial platform created
-                    for the Rauniyar community.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h4>Explore</h4>
-
-                <ul>
-
-                    <li>
-                        <a href="#story">Our Story</a>
-                    </li>
-
-                    <li>
-                        <a href="#features">What's Coming</a>
-                    </li>
-
-                    <li>
-                        <a href="#family">For Families</a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div>
-
-                <h4>Information</h4>
-
-                <ul>
-
-                    <li>
-                        <a href="#">Privacy</a>
-                    </li>
-
-                    <li>
-                        <a href="#">Terms</a>
-                    </li>
-
-                    <li>
-                        <a href="#">Safety</a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div>
-
-                <h4>Connect</h4>
-
-                <ul>
-
-                    <li>
-                        <a href="#">Instagram</a>
-                    </li>
-
-                    <li>
-                        <a href="#">Facebook</a>
-                    </li>
-
-                    <li>
-                        <a href="#">YouTube</a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-
-        <div class="copyright">
-
-            <span>
-                © 2026 Rauniyar Matrimony. All rights reserved.
-            </span>
-
-            <span>
-                Made for the Rauniyar Community.
-            </span>
-
-        </div>
-
+  <div class="footer-container">
+    <div class="footer-branding">
+      <h2 style="color: white; margin-bottom: 0;">Rauniyar Matrimony</h2>
+      <p class="footer-tagline">Where Traditions Meet New Beginnings</p>
     </div>
 
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="pages/search.html">Find Matches</a>
+        <a href="pages/register.html">Register</a>
+        <a href="pages/login.html">Login</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Community</h4>
+        <a href="pages/community.html">About Community</a>
+        <a href="pages/success-stories.html">Success Stories</a>
+        <a href="pages/events.html">Events</a>
+        <a href="pages/contact.html">Contact Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Information</h4>
+        <a href="pages/membership.html">Membership Plans</a>
+        <a href="pages/safety.html">Safety & Trust</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Get In Touch</h4>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Email: info@rauniyarmatrimony.com</p>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Phone: +91 XXXX XXXX XX</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rauniyar Matrimony. All rights reserved. | Trusted by 15,000+ members | 2,500+ successful matches</p>
+    </div>
+  </div>
 </footer>
 
-
-<!-- =============================================================
-     MOBILE CTA
-============================================================= -->
-
-<div class="mobile-cta">
-
-    <a href="#waitlist">
-
-        <button class="btn btn-primary">
-            JOIN THE WAITLIST
-        </button>
-
-    </a>
-
-</div>
-
-
-<!-- =============================================================
-     JAVASCRIPT
-============================================================= -->
+<!-- JavaScript -->
+<script src="js/app.js"></script>
 
 <script>
-
-    /* =========================================================
-       COUNTDOWN
-    ========================================================= */
-
-    /*
-       Change this date to your actual launch date.
-
-       Example:
-       December 1, 2026
-    */
-
-    const launchDate = new Date("December 1, 2026 00:00:00").getTime();
-
-
-    function updateCountdown() {
-
-        const now = new Date().getTime();
-
-        const distance = launchDate - now;
-
-
-        if (distance <= 0) {
-
-            document.getElementById("days").textContent = "00";
-            document.getElementById("hours").textContent = "00";
-            document.getElementById("minutes").textContent = "00";
-            document.getElementById("seconds").textContent = "00";
-
-            return;
-
-        }
-
-
-        const days = Math.floor(
-            distance / (1000 * 60 * 60 * 24)
-        );
-
-        const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24))
-            / (1000 * 60 * 60)
-        );
-
-        const minutes = Math.floor(
-            (distance % (1000 * 60 * 60))
-            / (1000 * 60)
-        );
-
-        const seconds = Math.floor(
-            (distance % (1000 * 60))
-            / 1000
-        );
-
-
-        document.getElementById("days").textContent =
-            String(days).padStart(2, "0");
-
-        document.getElementById("hours").textContent =
-            String(hours).padStart(2, "0");
-
-        document.getElementById("minutes").textContent =
-            String(minutes).padStart(2, "0");
-
-        document.getElementById("seconds").textContent =
-            String(seconds).padStart(2, "0");
-
-    }
-
-
-    updateCountdown();
-
-    setInterval(updateCountdown, 1000);
-
-
-    /* =========================================================
-       WAITLIST FORM
-    ========================================================= */
-
-    const waitlistForm =
-        document.getElementById("waitlistForm");
-
-    const successMessage =
-        document.getElementById("successMessage");
-
-
-    waitlistForm.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        waitlistForm.style.display = "none";
-
-        successMessage.style.display = "block";
-
-    });
-
-
-    /* =========================================================
-       SCROLL REVEAL
-    ========================================================= */
-
-    const revealElements =
-        document.querySelectorAll(".reveal");
-
-
-    const revealObserver =
-        new IntersectionObserver(
-            function(entries) {
-
-                entries.forEach(function(entry) {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("visible");
-
-                        revealObserver.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12
-            }
-        );
-
-
-    revealElements.forEach(function(element) {
-
-        revealObserver.observe(element);
-
-    });
-
-
-    /* =========================================================
-       MOBILE MENU
-    ========================================================= */
-
-    const menuButton =
-        document.querySelector(".menu-button");
-
-    const navLinks =
-        document.querySelector(".nav-links");
-
-
-    menuButton.addEventListener("click", function() {
-
-        const isOpen =
-            navLinks.style.display === "flex";
-
-        if (isOpen) {
-
-            navLinks.style.display = "none";
-
-        } else {
-
-            navLinks.style.display = "flex";
-
-            navLinks.style.position = "absolute";
-            navLinks.style.top = "75px";
-            navLinks.style.left = "14px";
-            navLinks.style.right = "14px";
-            navLinks.style.padding = "25px";
-
-            navLinks.style.flexDirection = "column";
-            navLinks.style.alignItems = "flex-start";
-
-            navLinks.style.background =
-                "rgba(55,13,28,.98)";
-
-            navLinks.style.borderRadius = "8px";
-
-        }
-
-    });
-
-
-    /* Close mobile menu after clicking */
-
-    document.querySelectorAll(".nav-links a")
-        .forEach(function(link) {
-
-            link.addEventListener("click", function() {
-
-                if (window.innerWidth <= 900) {
-
-                    navLinks.style.display = "none";
-
-                }
-
-            });
-
+  // Render featured profiles on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProfiles('featured-profiles', mockProfiles.slice(0, 3));
+    
+    // Accordion functionality
+    document.querySelectorAll('.card').forEach(card => {
+      const header = card.querySelector('.accordion-header');
+      const body = card.querySelector('.accordion-body');
+      if (header && body) {
+        header.addEventListener('click', () => {
+          card.classList.toggle('active');
+          body.style.display = body.style.display === 'none' ? 'block' : 'none';
         });
-
+      }
+    });
+  });
 </script>
 
 </body>

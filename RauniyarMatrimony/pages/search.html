@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Matrimonial Profiles - Rauniyar Matrimony</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .search-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: var(--spacing-xl);
+      min-height: calc(100vh - 70px);
+      padding: var(--spacing-xl) 0;
+    }
+
+    .filter-sidebar {
+      background-color: var(--surface);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .filter-group {
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-group:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .filter-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: var(--spacing-md);
+      font-size: 14px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .filter-option input {
+      cursor: pointer;
+    }
+
+    .filter-option label {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+    }
+
+    .view-toggle {
+      display: flex;
+      gap: var(--spacing-sm);
+      background-color: var(--surface-secondary);
+      padding: 4px;
+      border-radius: var(--radius-md);
+    }
+
+    .view-toggle button {
+      background-color: transparent;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-base);
+    }
+
+    .view-toggle button.active {
+      background-color: white;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sort-select {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .profiles-list {
+      display: grid;
+      gap: var(--spacing-lg);
+    }
+
+    .profiles-list.list-view .profile-card {
+      display: flex;
+      flex-direction: row;
+      height: auto;
+    }
+
+    .profiles-list.list-view .profile-image {
+      width: 150px;
+      height: 150px;
+      min-width: 150px;
+      padding-bottom: 0;
+    }
+
+    .filter-toggle {
+      display: none;
+      width: 100%;
+      margin-bottom: var(--spacing-lg);
+      position: sticky;
+      top: 70px;
+      z-index: 50;
+    }
+
+    .active-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .filter-tag {
+      background-color: var(--primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-tag button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .search-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-sidebar {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        max-height: none;
+        border-radius: 0;
+        border: none;
+        z-index: 99;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform var(--transition-base);
+      }
+
+      .filter-sidebar.active {
+        transform: translateX(0);
+      }
+
+      .filter-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .results-header {
+        flex-direction: column;
+      }
+
+      .profiles-list.list-view .profile-card {
+        flex-direction: column;
+      }
+
+      .profiles-list.list-view .profile-image {
+        width: 100%;
+        height: auto;
+        padding-bottom: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-container">
+    <a href="/" class="logo">
+      <div class="logo-icon">❤️</div>
+      <span>Rauniyar<br>Matrimony</span>
+    </a>
+    
+    <nav>
+      <a href="/">Home</a>
+      <a href="search.html" class="active">Find Matches</a>
+      <a href="community.html">Community</a>
+      <a href="success-stories.html">Success Stories</a>
+    </nav>
+    
+    <div class="nav-right">
+      <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE CONTENT -->
+<main class="container-page">
+  <div style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-xl);">
+    <h1>Search Matrimonial Profiles</h1>
+    <p style="color: var(--text-secondary);">Discover compatible matches from the Rauniyar community</p>
+  </div>
+
+  <!-- Filter Toggle for Mobile -->
+  <button class="filter-toggle btn btn-outline" onclick="document.querySelector('.filter-sidebar').classList.toggle('active')">
+    <i class="fas fa-sliders-h"></i> Show Filters
+  </button>
+
+  <div class="search-layout">
+    <!-- SIDEBAR FILTERS -->
+    <aside class="filter-sidebar">
+      <h3 style="color: var(--primary); margin-bottom: var(--spacing-lg); font-size: 16px;">Filters</h3>
+
+      <!-- Looking For -->
+      <div class="filter-group">
+        <div class="filter-title">Looking For</div>
+        <div class="filter-option">
+          <input type="radio" id="gender-female" name="gender" value="female" data-filter="gender">
+          <label for="gender-female">Female</label>
+        </div>
+        <div class="filter-option">
+          <input type="radio" id="gender-male" name="gender" value="male" data-filter="gender">
+          <label for="gender-male">Male</label>
+        </div>
+      </div>
+
+      <!-- Age Range -->
+      <div class="filter-group">
+        <div class="filter-title">Age Range</div>
+        <select data-filter="age" class="form-control" style="width: 100%; padding: var(--spacing-sm);">
+          <option value="">All Ages</option>
+          <option value="20-25">20 - 25</option>
+          <option value="25-30">25 - 30</option>
+          <option value="30-35">30 - 35</option>
+          <option value="35-40">35 - 40</option>
+          <option value="40+">40+</option>
+        </select>
+      </div>
+
+      <!-- Height -->
+      <div class="filter-group">
+        <div class="filter-title">Height</div>
+        <select data-filter="height" class="form-control" style="width: 100%; padding: var(--spacing-sm);">
+          <option value="">All Heights</option>
+          <option value="5-0">5' 0"</option>
+          <option value="5-3">5' 3"</option>
+          <option value="5-6">5' 6"</option>
+          <option value="5-9">5' 9"</option>
+          <option value="6-0">6' 0"+</option>
+        </select>
+      </div>
+
+      <!-- Location -->
+      <div class="filter-group">
+        <div class="filter-title">Location</div>
+        <select data-filter="location" class="form-control" style="width: 100%; padding: var(--spacing-sm);">
+          <option value="">All Cities</option>
+          <option value="rourkela">Rourkela</option>
+          <option value="bhubaneswar">Bhubaneswar</option>
+          <option value="kolkata">Kolkata</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="bangalore">Bangalore</option>
+          <option value="hyderabad">Hyderabad</option>
+        </select>
+      </div>
+
+      <!-- Education -->
+      <div class="filter-group">
+        <div class="filter-title">Education</div>
+        <select data-filter="education" class="form-control" style="width: 100%; padding: var(--spacing-sm);">
+          <option value="">All</option>
+          <option value="btech">B.Tech</option>
+          <option value="mba">MBA</option>
+          <option value="mtech">M.Tech</option>
+          <option value="msc">M.Sc</option>
+          <option value="bcom">B.Com</option>
+          <option value="ba">B.A</option>
+        </select>
+      </div>
+
+      <!-- Profession -->
+      <div class="filter-group">
+        <div class="filter-title">Profession</div>
+        <select data-filter="profession" class="form-control" style="width: 100%; padding: var(--spacing-sm);">
+          <option value="">All Professions</option>
+          <option value="engineer">Engineer</option>
+          <option value="doctor">Doctor</option>
+          <option value="manager">Manager</option>
+          <option value="teacher">Teacher</option>
+          <option value="entrepreneur">Entrepreneur</option>
+        </select>
+      </div>
+
+      <!-- Marital Status -->
+      <div class="filter-group">
+        <div class="filter-title">Marital Status</div>
+        <div class="filter-option">
+          <input type="checkbox" id="never-married" value="never-married">
+          <label for="never-married">Never Married</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="divorced" value="divorced">
+          <label for="divorced">Divorced</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="widowed" value="widowed">
+          <label for="widowed">Widowed</label>
+        </div>
+      </div>
+
+      <!-- Special Options -->
+      <div class="filter-group">
+        <div class="filter-option">
+          <input type="checkbox" id="verified" value="verified">
+          <label for="verified">Verified Profiles Only</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="photo" value="photo">
+          <label for="photo">Photos Available</label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-lg);" onclick="UI.applyFilters()">Apply Filters</button>
+    </aside>
+
+    <!-- RESULTS SECTION -->
+    <section>
+      <!-- Active Filters Display -->
+      <div class="active-filters" id="active-filters"></div>
+
+      <!-- Results Header -->
+      <div class="results-header">
+        <div>
+          <h3 style="margin: 0;">Matrimonial Profiles</h3>
+          <p style="color: var(--text-muted); font-size: 14px; margin: 4px 0;">Showing <strong id="profile-count">15</strong> profiles</p>
+        </div>
+        
+        <div style="display: flex; gap: var(--spacing-md); align-items: center; flex-wrap: wrap;">
+          <select class="sort-select" id="sort-by">
+            <option value="latest">Latest First</option>
+            <option value="popular">Most Popular</option>
+            <option value="age-asc">Age: Low to High</option>
+            <option value="age-desc">Age: High to Low</option>
+          </select>
+          
+          <div class="view-toggle">
+            <button class="active" onclick="document.querySelector('.profiles-list').classList.remove('list-view'); this.classList.add('active'); document.querySelector('.view-toggle button:last-child').classList.remove('active');" title="Grid View">
+              <i class="fas fa-th"></i>
+            </button>
+            <button onclick="document.querySelector('.profiles-list').classList.add('list-view'); this.classList.add('active'); document.querySelector('.view-toggle button:first-child').classList.remove('active');" title="List View">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profiles Grid -->
+      <div class="profiles-list profiles-grid" id="profiles-container"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" style="margin-top: var(--spacing-2xl);">
+        <a href="#">← Previous</a>
+        <span class="active">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <span>...</span>
+        <a href="#">10</a>
+        <a href="#">Next →</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-branding">
+      <h2 style="color: white; margin-bottom: 0;">Rauniyar Matrimony</h2>
+      <p class="footer-tagline">Where Traditions Meet New Beginnings</p>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h4>Platform</h4>
+        <a href="/">Home</a>
+        <a href="search.html">Find Matches</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Community</h4>
+        <a href="community.html">About Community</a>
+        <a href="success-stories.html">Success Stories</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Information</h4>
+        <a href="membership.html">Membership Plans</a>
+        <a href="safety.html">Safety & Trust</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Get In Touch</h4>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Email: info@rauniyarmatrimony.com</p>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Phone: +91 XXXX XXXX XX</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rauniyar Matrimony. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/app.js"></script>
+
+<script>
+  // Sample profiles data
+  const allProfiles = [
+    {
+      id: 1,
+      name: 'Priya Gupta',
+      age: 28,
+      height: "5'4\"",
+      education: 'MBA',
+      profession: 'Marketing Manager',
+      location: 'Rourkela, Odisha',
+      gender: 'female',
+      verified: true,
+      description: 'Family-oriented, career-focused and enjoys travelling.'
+    },
+    {
+      id: 2,
+      name: 'Neha Rauniyar',
+      age: 26,
+      height: "5'3\"",
+      education: 'B.Tech',
+      profession: 'Software Engineer',
+      location: 'Bangalore, KA',
+      gender: 'female',
+      verified: true,
+      description: 'Loves reading, travelling and cooking.'
+    },
+    {
+      id: 3,
+      name: 'Aman Rauniyar',
+      age: 32,
+      height: "5'11\"",
+      education: 'BTech',
+      profession: 'Business Analyst',
+      location: 'Delhi, DL',
+      gender: 'male',
+      verified: true,
+      description: 'Ambitious professional seeking like-minded partner.'
+    },
+    {
+      id: 4,
+      name: 'Shreya Gupta',
+      age: 25,
+      height: "5'2\"",
+      education: 'B.Com',
+      profession: 'Accountant',
+      location: 'Mumbai, MH',
+      gender: 'female',
+      verified: true,
+      description: 'Caring and family-devoted person.'
+    },
+    {
+      id: 5,
+      name: 'Rohan Gupta',
+      age: 30,
+      height: "5'10\"",
+      education: 'MBA',
+      profession: 'Manager',
+      location: 'Kolkata, WB',
+      gender: 'male',
+      verified: true,
+      description: 'Looking for a lifelong partner.'
+    },
+    // Add more profiles as needed
+  ];
+
+  function renderProfilesSearch(profiles) {
+    const container = document.getElementById('profiles-container');
+    container.innerHTML = profiles.map(p => getProfileCard(p)).join('');
+    document.getElementById('profile-count').textContent = profiles.length;
+    UI.initHeartButtons();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProfilesSearch(allProfiles);
+    
+    // Sort functionality
+    document.getElementById('sort-by').addEventListener('change', (e) => {
+      let sorted = [...allProfiles];
+      switch(e.target.value) {
+        case 'age-asc':
+          sorted.sort((a, b) => a.age - b.age);
+          break;
+        case 'age-desc':
+          sorted.sort((a, b) => b.age - a.age);
+          break;
+      }
+      renderProfilesSearch(sorted);
+    });
+  });
+</script>
+
+</body>
+</html>

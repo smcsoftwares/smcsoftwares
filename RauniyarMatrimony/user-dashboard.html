@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Rauniyar Matrimony</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: var(--spacing-xl);
+      min-height: calc(100vh - 70px);
+    }
+
+    .sidebar {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-xl);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+    }
+
+    .user-info h4 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+    }
+
+    .user-info p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .nav-menu {
+      list-style: none;
+    }
+
+    .nav-menu li {
+      margin-bottom: 0;
+    }
+
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md) var(--spacing-md);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background-color: rgba(122, 31, 61, 0.1);
+      color: var(--primary);
+    }
+
+    .nav-menu a i {
+      width: 20px;
+      text-align: center;
+    }
+
+    .sidebar-logout {
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+
+    .sidebar-logout .btn {
+      width: 100%;
+    }
+
+    .main-content {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .page-header {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .page-header h1 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .stats-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .stat-card {
+      background-color: var(--surface);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 28px;
+      color: var(--secondary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .dashboard-section {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .section-title a {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .profile-completion {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background-color: var(--surface-secondary);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 75%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .mini-profile-card {
+      background-color: var(--surface-secondary);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .mini-profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+      margin: 0 auto var(--spacing-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+    }
+
+    .empty-state-mini {
+      padding: var(--spacing-xl);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 70px;
+        border-radius: 0;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        z-index: 99;
+        transform: translateX(-100%);
+        transition: transform var(--transition-base);
+      }
+
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .stat-icon {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-container">
+    <a href="/" class="logo">
+      <div class="logo-icon">❤️</div>
+      <span>Rauniyar<br>Matrimony</span>
+    </a>
+    
+    <nav>
+      <a href="/">Home</a>
+      <a href="search.html">Find Matches</a>
+      <a href="community.html">Community</a>
+      <a href="success-stories.html">Success Stories</a>
+    </nav>
+    
+    <div class="nav-right">
+      <div class="dropdown">
+        <button class="btn btn-ghost" style="gap: var(--spacing-sm);">
+          <i class="fas fa-bell"></i>
+          <span style="background-color: var(--error); color: white; padding: 2px 6px; border-radius: var(--radius-full); font-size: 10px; font-weight: 700;">3</span>
+        </button>
+        <div class="dropdown-menu" style="width: 300px;">
+          <div style="padding: var(--spacing-md);">
+            <p style="font-size: 12px; color: var(--text-muted); margin: 0;">You have 3 new notifications</p>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">✓ Profile verified successfully</a>
+          <a href="#" class="dropdown-item">❤️ Priya sent you an interest</a>
+          <a href="#" class="dropdown-item">💬 New message from Neha</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="btn btn-ghost">
+          <div class="user-avatar" style="width: 32px; height: 32px; font-size: 14px;">👤</div>
+        </button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">My Profile</a>
+          <a href="#" class="dropdown-item">Edit Profile</a>
+          <a href="#" class="dropdown-item">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item" style="color: var(--error);">Logout</a>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="container-page">
+  <div class="dashboard-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="user-avatar">👤</div>
+        <div class="user-info">
+          <h4>Priya Gupta</h4>
+          <p>Premium Member</p>
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fas fa-user"></i> My Profile</a></li>
+        <li><a href="#"><i class="fas fa-edit"></i> Edit Profile</a></li>
+        <li><a href="#"><i class="fas fa-images"></i> Photos</a></li>
+        <li><a href="#"><i class="fas fa-heart"></i> Partner Preferences</a></li>
+        <li><a href="#"><i class="fas fa-search"></i> Discover</a></li>
+        <li><a href="#"><i class="fas fa-star"></i> Matches</a></li>
+        <li><a href="#"><i class="fas fa-paper-plane"></i> Interests</a></li>
+        <li><a href="#"><i class="fas fa-bookmark"></i> Shortlist</a></li>
+        <li><a href="#"><i class="fas fa-eye"></i> Visitors</a></li>
+        <li><a href="#"><i class="fas fa-comment"></i> Messages</a></li>
+        <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+        <li><a href="#"><i class="fas fa-credit-card"></i> Membership</a></li>
+        <li><a href="#"><i class="fas fa-lock"></i> Privacy</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+      </ul>
+
+      <div class="sidebar-logout">
+        <button class="btn btn-outline" onclick="alert('Logging out...'); window.location.href='login.html';">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD -->
+    <section class="main-content">
+      <div class="page-header">
+        <h1>Welcome back, Priya! 👋</h1>
+        <p style="color: var(--text-secondary);">Here's what's happening with your profile today</p>
+      </div>
+
+      <!-- STATS OVERVIEW -->
+      <div class="stats-overview">
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-value">75%</div>
+          <div class="stat-label">Profile Completion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👁️</div>
+          <div class="stat-value">142</div>
+          <div class="stat-label">Profile Views</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">❤️</div>
+          <div class="stat-value">24</div>
+          <div class="stat-label">Interests Received</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✉️</div>
+          <div class="stat-value">8</div>
+          <div class="stat-label">New Matches</div>
+        </div>
+      </div>
+
+      <!-- PROFILE COMPLETION -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <h2>Complete Your Profile</h2>
+          <a href="#">View Full Profile</a>
+        </div>
+        
+        <div class="profile-completion">
+          <p style="margin-bottom: var(--spacing-md); font-size: 14px; color: var(--text-secondary);">
+            Complete profile sections to increase your visibility and match compatibility
+          </p>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+          <div class="progress-text">75% Complete - 3 sections remaining</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-md);">
+          <div style="padding: var(--spacing-md); background-color: var(--surface-secondary); border-radius: var(--radius-md); text-align: center;">
+            <div style="font-size: 20px; margin-bottom: 4px;">✓</div>
+            <p style="margin: 0; font-size: 12px; font-weight: 600; color: var(--success);">Basic Info</p>
+          </div>
+          <div style="padding: var(--spacing-md); background-color: var(--surface-secondary); border-radius: var(--radius-md); text-align: center;">
+            <div style="font-size: 20px; margin-bottom: 4px;">✓</div>
+            <p style="margin: 0; font-size: 12px; font-weight: 600; color: var(--success);">Photos</p>
+          </div>
+          <div style="padding: var(--spacing-md); background-color: var(--surface-secondary); border-radius: var(--radius-md); text-align: center;">
+            <div style="font-size: 20px; margin-bottom: 4px;">✓</div>
+            <p style="margin: 0; font-size: 12px; font-weight: 600; color: var(--success);">Education</p>
+          </div>
+          <div style="padding: var(--spacing-md); background-color: var(--surface-secondary); border-radius: var(--radius-md); text-align: center; opacity: 0.5;">
+            <div style="font-size: 20px; margin-bottom: 4px;">○</div>
+            <p style="margin: 0; font-size: 12px; font-weight: 600; color: var(--text-muted);">Horoscope</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT INTERESTS -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <h2>Recent Interests Received</h2>
+          <a href="#">View All (24)</a>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--spacing-lg);">
+          <div class="profile-card">
+            <div class="profile-image">
+              <div style="width: 100%; height: 100%; background-color: var(--surface-secondary); display: flex; align-items: center; justify-content: center; font-size: 48px;">👨</div>
+              <div class="profile-badge">✓ Verified</div>
+            </div>
+            <div class="profile-content">
+              <div class="profile-name">Aman Rauniyar</div>
+              <div class="profile-meta">32 Years • 5'11"</div>
+              <div class="profile-stats">
+                <div class="profile-stat">B.Tech</div>
+                <div class="profile-stat">•</div>
+                <div class="profile-stat">Manager</div>
+              </div>
+              <div class="profile-location">📍 Delhi, DL</div>
+              <div class="profile-actions">
+                <button class="btn btn-primary btn-sm" onclick="UI.showToast('Interest accepted!')">Accept</button>
+                <button class="btn btn-outline btn-sm" onclick="UI.showToast('Interest declined')">Decline</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-image">
+              <div style="width: 100%; height: 100%; background-color: var(--surface-secondary); display: flex; align-items: center; justify-content: center; font-size: 48px;">👨</div>
+              <div class="profile-badge">✓ Verified</div>
+            </div>
+            <div class="profile-content">
+              <div class="profile-name">Rohan Gupta</div>
+              <div class="profile-meta">30 Years • 5'10"</div>
+              <div class="profile-stats">
+                <div class="profile-stat">MBA</div>
+                <div class="profile-stat">•</div>
+                <div class="profile-stat">Manager</div>
+              </div>
+              <div class="profile-location">📍 Kolkata, WB</div>
+              <div class="profile-actions">
+                <button class="btn btn-primary btn-sm" onclick="UI.showToast('Interest accepted!')">Accept</button>
+                <button class="btn btn-outline btn-sm" onclick="UI.showToast('Interest declined')">Decline</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-image">
+              <div style="width: 100%; height: 100%; background-color: var(--surface-secondary); display: flex; align-items: center; justify-content: center; font-size: 48px;">👨</div>
+              <div class="profile-badge">✓ Verified</div>
+            </div>
+            <div class="profile-content">
+              <div class="profile-name">Ankit Rauniyar</div>
+              <div class="profile-meta">29 Years • 5'9"</div>
+              <div class="profile-stats">
+                <div class="profile-stat">B.Tech</div>
+                <div class="profile-stat">•</div>
+                <div class="profile-stat">Engineer</div>
+              </div>
+              <div class="profile-location">📍 Bangalore, KA</div>
+              <div class="profile-actions">
+                <button class="btn btn-primary btn-sm" onclick="UI.showToast('Interest accepted!')">Accept</button>
+                <button class="btn btn-outline btn-sm" onclick="UI.showToast('Interest declined')">Decline</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMMENDED MATCHES -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <h2>Recommended Matches for You</h2>
+          <a href="#">View All</a>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--spacing-lg);">
+          <div class="profile-card">
+            <div class="profile-image">
+              <div style="width: 100%; height: 100%; background-color: var(--surface-secondary); display: flex; align-items: center; justify-content: center; font-size: 48px;">👨</div>
+              <div class="profile-badge">92% Match</div>
+            </div>
+            <div class="profile-content">
+              <div class="profile-name">Vikram Singh</div>
+              <div class="profile-meta">31 Years • 5'11"</div>
+              <div class="profile-stats">
+                <div class="profile-stat">MBA</div>
+                <div class="profile-stat">•</div>
+                <div class="profile-stat">Entrepreneur</div>
+              </div>
+              <div class="profile-location">📍 Mumbai, MH</div>
+              <div class="profile-actions">
+                <button class="btn btn-primary btn-sm" onclick="UI.showToast('Interest sent!')">Send Interest</button>
+                <button class="heart-btn" onclick="toggleShortlist(1, this)">♡</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-image">
+              <div style="width: 100%; height: 100%; background-color: var(--surface-secondary); display: flex; align-items: center; justify-content: center; font-size: 48px;">👨</div>
+              <div class="profile-badge">88% Match</div>
+            </div>
+            <div class="profile-content">
+              <div class="profile-name">Rajesh Kumar</div>
+              <div class="profile-meta">33 Years • 5'10"</div>
+              <div class="profile-stats">
+                <div class="profile-stat">B.Tech</div>
+                <div class="profile-stat">•</div>
+                <div class="profile-stat">Manager</div>
+              </div>
+              <div class="profile-location">📍 Hyderabad, TG</div>
+              <div class="profile-actions">
+                <button class="btn btn-primary btn-sm" onclick="UI.showToast('Interest sent!')">Send Interest</button>
+                <button class="heart-btn" onclick="toggleShortlist(2, this)">♡</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-image">
+              <div style="width: 100%; height: 100%; background-color: var(--surface-secondary); display: flex; align-items: center; justify-content: center; font-size: 48px;">👨</div>
+              <div class="profile-badge">85% Match</div>
+            </div>
+            <div class="profile-content">
+              <div class="profile-name">Suresh Patel</div>
+              <div class="profile-meta">28 Years • 5'8"</div>
+              <div class="profile-stats">
+                <div class="profile-stat">B.Com</div>
+                <div class="profile-stat">•</div>
+                <div class="profile-stat">Accountant</div>
+              </div>
+              <div class="profile-location">📍 Rourkela, OD</div>
+              <div class="profile-actions">
+                <button class="btn btn-primary btn-sm" onclick="UI.showToast('Interest sent!')">Send Interest</button>
+                <button class="heart-btn" onclick="toggleShortlist(3, this)">♡</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="../js/app.js"></script>
+
+<script>
+  function toggleShortlist(id, element) {
+    element.classList.toggle('active');
+    UI.showToast(element.classList.contains('active') ? 'Added to shortlist' : 'Removed from shortlist');
+  }
+</script>
+
+</body>
+</html>

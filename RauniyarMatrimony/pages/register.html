@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Rauniyar Matrimony</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .register-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--spacing-xl);
+      max-width: 900px;
+      margin: var(--spacing-2xl) auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    .progress-sidebar {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .progress-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: 14px;
+    }
+
+    .progress-steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      opacity: 0.5;
+      transition: all var(--transition-base);
+    }
+
+    .progress-step.active {
+      opacity: 1;
+    }
+
+    .progress-step.completed {
+      opacity: 0.7;
+    }
+
+    .progress-number {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background-color: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .progress-step.active .progress-number {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .progress-step.completed .progress-number {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .progress-step.completed .progress-number::after {
+      content: '✓';
+      position: absolute;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .register-form {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+    }
+
+    .form-header {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .form-header h2 {
+      margin: 0 0 var(--spacing-sm) 0;
+      font-size: 24px;
+    }
+
+    .form-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: var(--spacing-sm);
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-size: 14px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(122, 31, 61, 0.1);
+    }
+
+    .form-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-sm);
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .radio-option input {
+      width: auto;
+    }
+
+    .radio-option label {
+      margin: 0;
+      font-weight: 400;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-sm);
+    }
+
+    .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .checkbox-option input {
+      width: auto;
+    }
+
+    .checkbox-option label {
+      margin: 0;
+      font-weight: 400;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-xl);
+      border-top: 1px solid var(--border);
+    }
+
+    .form-actions button {
+      padding: var(--spacing-md) var(--spacing-xl);
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+    }
+
+    .btn-prev {
+      background-color: var(--border);
+      color: var(--text-secondary);
+      flex: 1;
+    }
+
+    .btn-prev:hover {
+      background-color: var(--surface-secondary);
+    }
+
+    .btn-next {
+      background-color: var(--primary);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-next:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-submit {
+      background-color: var(--secondary);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-submit:hover {
+      background-color: #B5875F;
+    }
+
+    .success-message {
+      background-color: rgba(39, 174, 96, 0.1);
+      border-left: 4px solid var(--success);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      color: var(--success);
+      margin-bottom: var(--spacing-lg);
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .register-container {
+        grid-template-columns: 1fr;
+      }
+
+      .progress-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: var(--spacing-sm);
+      }
+
+      .progress-steps {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .progress-label {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .radio-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-container">
+    <a href="/" class="logo">
+      <div class="logo-icon">❤️</div>
+      <span>Rauniyar<br>Matrimony</span>
+    </a>
+    
+    <nav>
+      <a href="/">Home</a>
+      <a href="search.html">Find Matches</a>
+      <a href="community.html">Community</a>
+      <a href="success-stories.html">Success Stories</a>
+    </nav>
+    
+    <div class="nav-right">
+      <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+  <div class="register-container">
+    <!-- PROGRESS SIDEBAR -->
+    <aside class="progress-sidebar">
+      <div class="progress-title">Registration Steps</div>
+      <div class="progress-steps">
+        <div class="progress-step active" data-step="1">
+          <div class="progress-number">1</div>
+          <div class="progress-label">Who are you registering for?</div>
+        </div>
+        <div class="progress-step" data-step="2">
+          <div class="progress-number">2</div>
+          <div class="progress-label">Basic Information</div>
+        </div>
+        <div class="progress-step" data-step="3">
+          <div class="progress-number">3</div>
+          <div class="progress-label">Education & Career</div>
+        </div>
+        <div class="progress-step" data-step="4">
+          <div class="progress-number">4</div>
+          <div class="progress-label">Location</div>
+        </div>
+        <div class="progress-step" data-step="5">
+          <div class="progress-number">5</div>
+          <div class="progress-label">Family & Lifestyle</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- REGISTRATION FORM -->
+    <div class="register-form">
+      <div class="success-message" id="success-msg">
+        <i class="fas fa-check-circle"></i> Profile created successfully! Please check your email to verify.
+      </div>
+
+      <form id="register-form" onsubmit="handleRegister(event)">
+        <!-- STEP 1: WHO ARE YOU REGISTERING FOR? -->
+        <div class="form-step active" data-step="1">
+          <div class="form-header">
+            <h2>Who are you registering for?</h2>
+            <p>Let us know who this profile is for</p>
+          </div>
+
+          <div class="form-group">
+            <label>Registering For</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="self" name="registering-for" value="self" checked>
+                <label for="self">Myself</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="son" name="registering-for" value="son">
+                <label for="son">Son</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="daughter" name="registering-for" value="daughter">
+                <label for="daughter">Daughter</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="brother" name="registering-for" value="brother">
+                <label for="brother">Brother</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="sister" name="registering-for" value="sister">
+                <label for="sister">Sister</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="relative" name="registering-for" value="relative">
+                <label for="relative">Relative/Friend</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: BASIC INFORMATION -->
+        <div class="form-step" data-step="2">
+          <div class="form-header">
+            <h2>Basic Information</h2>
+            <p>Tell us about yourself</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name *</label>
+              <input type="text" id="first-name" name="first-name" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name *</label>
+              <input type="text" id="last-name" name="last-name" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dob">Date of Birth *</label>
+              <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender *</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="height">Height *</label>
+              <select id="height" name="height" required>
+                <option value="">Select Height</option>
+                <option value="5-0">5' 0"</option>
+                <option value="5-3">5' 3"</option>
+                <option value="5-6">5' 6"</option>
+                <option value="5-9">5' 9"</option>
+                <option value="6-0">6' 0"+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="marital-status">Marital Status *</label>
+              <select id="marital-status" name="marital-status" required>
+                <option value="">Select Status</option>
+                <option value="never-married">Never Married</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mother-tongue">Mother Tongue *</label>
+              <select id="mother-tongue" name="mother-tongue" required>
+                <option value="">Select Language</option>
+                <option value="hindi">Hindi</option>
+                <option value="english">English</option>
+                <option value="odia">Odia</option>
+                <option value="bengali">Bengali</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="diet">Diet *</label>
+              <select id="diet" name="diet" required>
+                <option value="">Select Diet</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="non-vegetarian">Non-Vegetarian</option>
+                <option value="eggetarian">Eggetarian</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: EDUCATION & CAREER -->
+        <div class="form-step" data-step="3">
+          <div class="form-header">
+            <h2>Education & Career</h2>
+            <p>Tell us about your professional background</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="education">Education Level *</label>
+              <select id="education" name="education" required>
+                <option value="">Select Education</option>
+                <option value="12th">12th Pass</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="diploma">Diploma</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="field-of-study">Field of Study</label>
+              <input type="text" id="field-of-study" name="field-of-study" placeholder="e.g., Engineering, Commerce">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="profession">Profession *</label>
+              <select id="profession" name="profession" required>
+                <option value="">Select Profession</option>
+                <option value="engineer">Engineer</option>
+                <option value="doctor">Doctor</option>
+                <option value="manager">Manager</option>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+                <option value="entrepreneur">Entrepreneur</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="income">Annual Income</label>
+              <select id="income" name="income">
+                <option value="">Select Income Range</option>
+                <option value="2-5">₹2 - 5 Lakhs</option>
+                <option value="5-10">₹5 - 10 Lakhs</option>
+                <option value="10-15">₹10 - 15 Lakhs</option>
+                <option value="15+">₹15+ Lakhs</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: LOCATION -->
+        <div class="form-step" data-step="4">
+          <div class="form-header">
+            <h2>Location</h2>
+            <p>Where do you live?</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City *</label>
+              <select id="city" name="city" required>
+                <option value="">Select City</option>
+                <option value="rourkela">Rourkela</option>
+                <option value="bhubaneswar">Bhubaneswar</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="bangalore">Bangalore</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="state">State *</label>
+              <select id="state" name="state" required>
+                <option value="">Select State</option>
+                <option value="odisha">Odisha</option>
+                <option value="wb">West Bengal</option>
+                <option value="delhi">Delhi</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="karnataka">Karnataka</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="address">Residential Area</label>
+            <input type="text" id="address" name="address" placeholder="Enter your residential area/locality">
+          </div>
+        </div>
+
+        <!-- STEP 5: FAMILY & LIFESTYLE -->
+        <div class="form-step" data-step="5">
+          <div class="form-header">
+            <h2>Family & Lifestyle</h2>
+            <p>Complete your profile</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="family-type">Family Type *</label>
+              <select id="family-type" name="family-type" required>
+                <option value="">Select Family Type</option>
+                <option value="nuclear">Nuclear</option>
+                <option value="joint">Joint</option>
+                <option value="extended">Extended</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="family-status">Family Status *</label>
+              <select id="family-status" name="family-status" required>
+                <option value="">Select Status</option>
+                <option value="both-alive">Both Parents Alive</option>
+                <option value="father-alive">Father Alive</option>
+                <option value="mother-alive">Mother Alive</option>
+                <option value="parents-deceased">Parents Deceased</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Hobbies & Interests</label>
+            <input type="text" name="hobbies" placeholder="e.g., Reading, Travelling, Cooking">
+          </div>
+
+          <div class="form-group">
+            <label>About You</label>
+            <textarea name="bio" placeholder="Tell us about yourself in 100-200 words..." rows="4"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" name="terms" required>
+              I agree to the Terms & Conditions and Privacy Policy
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" name="communication">
+              I want to receive updates and notifications via email
+            </label>
+          </div>
+        </div>
+
+        <!-- FORM ACTIONS -->
+        <div class="form-actions">
+          <button type="button" class="btn-prev" onclick="previousStep()" id="btn-prev" style="display: none;">
+            ← Previous
+          </button>
+          <button type="button" class="btn-next" onclick="nextStep()" id="btn-next">
+            Next →
+          </button>
+          <button type="submit" class="btn-submit" id="btn-submit" style="display: none;">
+            <i class="fas fa-check"></i> Create Profile
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-branding">
+      <h2 style="color: white; margin-bottom: 0;">Rauniyar Matrimony</h2>
+      <p class="footer-tagline">Where Traditions Meet New Beginnings</p>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h4>Platform</h4>
+        <a href="/">Home</a>
+        <a href="search.html">Find Matches</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Community</h4>
+        <a href="community.html">About Community</a>
+        <a href="success-stories.html">Success Stories</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Information</h4>
+        <a href="membership.html">Membership Plans</a>
+        <a href="safety.html">Safety & Trust</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Get In Touch</h4>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Email: info@rauniyarmatrimony.com</p>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Phone: +91 XXXX XXXX XX</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rauniyar Matrimony. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/app.js"></script>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  function updateProgress() {
+    // Update progress sidebar
+    document.querySelectorAll('.progress-step').forEach(step => {
+      const stepNum = parseInt(step.getAttribute('data-step'));
+      step.classList.remove('active', 'completed');
+      if (stepNum < currentStep) {
+        step.classList.add('completed');
+      } else if (stepNum === currentStep) {
+        step.classList.add('active');
+      }
+    });
+
+    // Update form steps
+    document.querySelectorAll('.form-step').forEach(step => {
+      step.classList.remove('active');
+    });
+    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+
+    // Update buttons
+    document.getElementById('btn-prev').style.display = currentStep === 1 ? 'none' : 'block';
+    document.getElementById('btn-next').style.display = currentStep === totalSteps ? 'none' : 'block';
+    document.getElementById('btn-submit').style.display = currentStep === totalSteps ? 'block' : 'none';
+  }
+
+  function nextStep() {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function previousStep() {
+    if (currentStep > 1) {
+      currentStep--;
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function handleRegister(e) {
+    e.preventDefault();
+    UI.showToast('Registration successful! Verification email sent.', 'success');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 2000);
+  }
+
+  // Initialize
+  updateProgress();
+</script>
+
+</body>
+</html>
